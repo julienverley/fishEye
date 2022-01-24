@@ -4,3 +4,12 @@
 
 Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.
 
+
+____________________
+
+Notes
+
+____________________
+
+
+factory function = fonction qui retourne un objet

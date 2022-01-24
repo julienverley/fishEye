@@ -8,7 +8,42 @@
     margin: 0 100px;
 }
 
-.contact_button {
+.photograph-header article {
+    display: flex;
+    flex-direction: row; /* à revoir */ 
+    align-items: center;
+    justify-content: space-between;
+}
+
+.photograph-header article h1 {
+    color: #D3573C;
+    text-align: left;
+    font-size: 44px;
+    font-weight: 100;
+    margin: 0;
+}
+
+.photograph-header article h2 {
+    color: #901C1C; 
+    font-weight: 200;
+    margin: 0;
+}
+
+.photograph-header article h3 {
+    margin: 0;
+    color: grey;
+    font-size: 16px;
+    font-weight: 100;
+}
+
+.photograph-header img {
+height: 200px;
+width: 200px;
+border-radius: 100px;
+object-fit: cover;
+}
+
+.contact-button {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -20,6 +55,11 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+
+
+
+/* Form modal */
 
 .modal {
     border-radius: 5px;
