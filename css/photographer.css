@@ -68,6 +68,20 @@ object-fit: cover;
     outline: none;
 }
 
+.photograph-media-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 70px;
+    margin-top: 100px;
+}
+
+    .photograph-media-cards div img{
+        height: 200px;
+        width: 200px;
+        object-fit: cover;
+}
+
+
 /* Form modal */
 
 .modal {
