@@ -9,18 +9,40 @@
   </head>
   <body>
    
-    <header>
-      <img src="assets/images/logo.png" class="logo" />
+    <header role="banner">
+      <a href="./index.html">
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page logo"/>
+      </a>
     </header>
    
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact-button" onclick="displayModal()">Contactez-moi</button>
+    <main id="main" class="main">
+      
+      <!--Photographer header-->
+      <section class="photograph-header" role="region" aria-label="photographer information">
+        <!--<button class="contact-button" onclick="displayModal()">Contactez-moi</button>-->
+      </section>
+
+      <!--Button sort popularité/date/titre-->
+      <div class="select-box" role="listbox">
       </div>
+
+      <!--Photographer medias-->
+      <section class="photograph-media-cards" role="region" aria-label="medias catalog">
+      </section>
+
+      <!--Photographer likes & price-->
+      <footer class="footer" role="">
+      </footer>
+
     </main>
-   
+
+    
+    <!--Caroussel slider-->
+    <section class="lightbox-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    </section>
+
     <!--Form-->
-    <div id="contact_modal">
+    <div id="contact_modal" aria-hidden="true" role="dialog" aria-modal="true">
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
@@ -35,6 +57,8 @@
 				</form>
 			</div>
 		</div>
+
+  
     <!--Factories-->
     <script src="/scripts/factories/photographer.js"></script>
 

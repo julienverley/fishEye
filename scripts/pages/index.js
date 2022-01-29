@@ -18,8 +18,8 @@
         fetch("./data/photographers.json")
             .then((response) => response.json())
             .then((data) => {
+                const { photographers } = data; // = data (photographers) du json ; ou const photographers = data.photographers;
                 console.log(data);
-                const { photographers } = data; 
                 displayData(photographers);
             });
         

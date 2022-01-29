@@ -3,6 +3,9 @@
 }
 
 .photograph-header {
+/*  display: flex; */ 
+    justify-content: space-between;
+    align-items: center;
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
@@ -13,6 +16,7 @@
     flex-direction: row; /* à revoir */ 
     align-items: center;
     justify-content: space-between;
+    margin: 0 3%;
 }
 
 .photograph-header article h1 {
@@ -44,6 +48,7 @@ object-fit: cover;
 }
 
 .contact-button {
+    
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -56,8 +61,12 @@ object-fit: cover;
     cursor: pointer;
 }
 
-
-
+.contact-button:hover,
+.contact-button:focus {
+    color: #000;
+    background-color: #db8876;
+    outline: none;
+}
 
 /* Form modal */
 
