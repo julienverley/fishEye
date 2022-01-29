@@ -22,6 +22,7 @@ function photographerFactory(data) {
         article.appendChild(h4); 
         article.appendChild(h5); 
         article.appendChild(h6); 
+        
         return (article);
     }
     return { // factory function return un objet, avec les deux fonctions 

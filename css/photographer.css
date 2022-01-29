@@ -76,8 +76,8 @@ object-fit: cover;
 }
 
     .photograph-media-cards div img{
-        height: 200px;
-        width: 200px;
+        height: 300px;
+        width: 350px;
         object-fit: cover;
 }
 

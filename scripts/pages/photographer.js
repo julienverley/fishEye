@@ -25,7 +25,7 @@ const initPhotographerData = () => { // --> initPhotographerData returns un seul
 
 
 /* 
-Main / Photographer pictures 
+Main / Photographer medias 
 */
 const displayMedias = (medias) => { // medias en ref à dataPage // --> displayMedia reçoit ce qu initMediaData renvoie comme paramètre
     const mediasCards = document.querySelector(".photograph-media-cards"); // ajoute un node userCardDOM 
@@ -34,12 +34,18 @@ const displayMedias = (medias) => { // medias en ref à dataPage // --> displayM
     medias.forEach((media) => {
         const mediasModel = mediasFactoryPage(media); // photographerModel = objet photographer avec keys/values
         console.table(mediasModel)
-        const mediasCardDOM = mediasModel.createMediasCardDOMPage(); // userCardDOM = objet photographer créé dans le DOM
+        const mediasCardDOM = mediasModel.createMediasCardDOMPage(); // mediasCardDOM = objet photographer créé dans le DOM
         mediasCards.appendChild(mediasCardDOM); // ajoute un node userCardDOM 
 
-       /*  mediasCardDOM.addEventListener('click', () => { // au click...
-            modal lightbox photos
-        }) */
+
+
+
+        mediasCardDOM.addEventListener('click', () => { // au click...
+        //    modal lightbox photos
+        })
+
+
+        
     }); 
 };
 
