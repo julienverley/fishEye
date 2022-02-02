@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <!--Fontawesome-->
+    <script src="https://kit.fontawesome.com/9d7038c6db.js" crossorigin="anonymous"></script> <!-- Fontawesome importé en JS-->
+    <!--Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <!--CSS-->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/contact.css" rel="stylesheet" type="text/css" />
+    <!-- <link rel="stylesheet" href="css/lightbox.css"> -->
+  
     <title>Fisheye - photographe </title>
   </head>
   <body>
@@ -16,30 +23,35 @@
     </header>
    
     <main id="main" class="main">
-      
       <!--Photographer header-->
       <section class="photograph-header" role="region" aria-label="photographer information">
         <!--<button class="contact-button" onclick="displayModal()">Contactez-moi</button>-->
       </section>
-
       <!--Button sort popularité/date/titre-->
       <div class="select-box" role="listbox">
       </div>
-
       <!--Photographer medias-->
       <section class="photograph-media-cards" role="region" aria-label="medias catalog">
       </section>
-
       <!--Photographer likes & price-->
       <footer class="footer" role="">
       </footer>
 
     </main>
 
-    
-    <!--Caroussel slider-->
-    <section class="lightbox-modal" aria-hidden="true" role="dialog" aria-modal="true">
-    </section>
+
+
+    <!--Caroussel slider Modal lightbox-->
+    <div class="lightbox">
+      <button class="lightbox-button lightbox__close">Fermer</button>
+      <button class="lightbox-button lightbox__next">Suivant</button>
+      <button class="lightbox-button lightbox__prev">Précédent</button>
+      <div class="lightbox__container">
+        <img src="https://picsum.photos/id/870/1050/900" alt="">
+    </div>
+  </div>
+
+
 
     <!--Form-->
     <div id="contact_modal" aria-hidden="true" role="dialog" aria-modal="true">
@@ -52,21 +64,31 @@
 					<div>
 						<label>Prénom</label>
 						<input />
+            <label>Nom</label>
+						<input />
+            <label for="email">Email</label>
+						<input />
+            <label>Votre message</label>
+            <textarea></textarea>
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <button class="contact-button">Envoyer</button>
 				</form>
 			</div>
 		</div>
 
   
+
     <!--Factories-->
     <script src="/scripts/factories/photographer.js"></script>
 
     <!--Pages-->
+    <script src="scripts/pages/index.js"></script>
     <script src="/scripts/pages/photographer.js"></script>
     <!--App-->
 
-    <!--Tools-->
+    <!--Utils-->
     <script src="/scripts/utils/contactForm.js"></script>
+    <script src="/scripts/utils/lightbox.js" type="module"></script>
+
   </body>
 </html>

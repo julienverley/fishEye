@@ -46,28 +46,28 @@ Main / Photographer medias
 const mediasFactoryPage = (mediaObject) => { // function attend un objet à traiter ; assigne les keys values aux 7 variables name, id etc.
     const { id, photographerId, title, image, likes, date, price } = mediaObject; // ou const name = dataPage.name etc. pour chaque key 
     
-    const medias = `assets/photographersMedias/${photographerId}/${image}`; 
-    console.table(medias) // tous OK, sauf UNDEFINED: 930 527 !! 
+    const medias = `assets/photographersMedias/${photographerId}/${image}`; // ajouter ${video}
+    console.table(medias) //
 
     const createMediasCardDOMPage = () => { // PhotographerCardDOMPage créée dans le DOM
-        const section = document.createElement('section');
+        
+        /* const div = document.createElement('href'); 
+        href.setAttribute("a", medias) */
         const div = document.createElement('div'); 
         const img = document.createElement('img');
         img.setAttribute("src", medias)
         const h1 = document.createElement ('h1'); 
         h1.textContent = title; 
+        div.append(img);
+        div.append(h1); 
 
-        section.appendChild(div);
-        div.appendChild(img);
-        div.appendChild(h1); 
-
-        return (section);
+        return (div); // section
     }
     return { // factory function returns un objet  
         id, 
         photographerId, 
         title, 
-        image, 
+        image, //video ?
         likes, 
         date, 
         price,
