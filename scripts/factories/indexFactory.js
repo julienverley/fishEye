@@ -23,7 +23,7 @@ function photographerFactory(data) {
         article.appendChild(h5); 
         article.appendChild(h6); 
         
-        return (article); // Pourquoi return(article) ?
+        return (article); // return(article) renvoie l'article 
     }
     return { // factory function return un objet, avec les deux fonctions 
         name, 

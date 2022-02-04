@@ -12,11 +12,11 @@
     const links = Array.from(document.querySelectorAll('.lightbox-media'))  
     console.log(links);
     console.log(`Ce que contient links: ${links}`)
-    const gallery = links.map(link => link.getAttribute('href'))
+    const gallery = links.map(link => link.getAttribute('src'))
     console.log(gallery);
     links.forEach(link => link.addEventListener('click', e => {
         e.preventDefault()
-        new Lightbox(e.currentTarget.getAttribute('href'), gallery)
+        new Lightbox(e.currentTarget.getAttribute('src'), gallery)
       }))
   }
 
