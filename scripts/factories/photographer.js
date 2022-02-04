@@ -52,18 +52,16 @@ const mediasFactoryPage = (mediaObject) => { // function attend un objet à trai
 
     const createMediasCardDOMPage = () => { // PhotographerCardDOMPage créée dans le DOM
         
-        /* const div = document.createElement('href'); 
-        href.setAttribute("a", medias) */
         const div = document.createElement('div'); 
-        const a = document.createElement('a'); 
+        /* const a = document.createElement('a'); 
         a.setAttribute("href", medias); 
-        a.classList.add('lightbox-media'); 
+        a.classList.add('lightbox-media');  */
         const img = document.createElement('img');
         img.setAttribute("src", medias)
         const h1 = document.createElement ('h1'); 
         h1.textContent = title; 
-        div.append(a); 
-        a.append(img);
+        /* div.append(a);  */
+        div.append(img);
         div.append(h1); 
 
         return (div); // Pourquoi ? 

@@ -1,3 +1,5 @@
+let currentLightBoxIndex = 0;
+
 // ajouté, non lu 
 /* import { Lightbox } from "./scripts/utils/lightbox.js";
  */
@@ -20,9 +22,12 @@ const initPhotographerData = () => { // --> initPhotographerData returns un seul
         .then((response) => response.json()) // reçoit l'objet en brut et le transforme en json objet exploitable par js 
         .then((data) => { // les données prêtes à être exploitées, je les utilise  
             const photographers = data.photographers; // = data (photographers) du json ; data.photographers, je les nomme photographers (ou const { photographers } = data)
-            const searchParams = new URLSearchParams(window.location.search); 
-            const photographerUrlId = searchParams.get('id');       
-            console.log(photographerUrlId);       
+            
+            const photographerUrlId = getIdParameter(); // Renvoie à la fonction de urlId.js
+            /* const searchParams = new URLSearchParams(window.location.search); // cf. urlId.js
+            const photographerUrlId = searchParams.get('id'); // cf. urlId.js
+            console.log(photographerUrlId); */ // cf. urlId.js // je m'entraine à appeler des fonctions dans d'autres .js 
+
             const photographerToDisplay = photographers.find(element => element.id == photographerUrlId); // display le photographer dont l'ID == l'ID de l'URL cliquée
             displayPhotographer(photographerToDisplay) // displayPhotographer (autre fonction) affiche photographerToDisplay
         });
@@ -37,17 +42,32 @@ const displayMedias = (medias) => { // medias en ref à dataPage // --> displayM
     const mediasCards = document.querySelector(".photograph-media-cards"); // ajoute un node userCardDOM 
     
     // forEach    
-    medias.forEach((media) => { // !! CF screenshot deuxième paramètre (media, index) pour naviguer !! 
+    medias.forEach((media, index) => { // !! CF screenshot deuxième paramètre (media, index) pour naviguer !! 
         const mediasModel = mediasFactoryPage(media); // photographerModel = objet photographer avec keys/values
         // console.table(mediasModel)
         const mediasCardDOM = mediasModel.createMediasCardDOMPage(); // mediasCardDOM = objet photographer créé dans le DOM
         mediasCards.appendChild(mediasCardDOM); // ajoute un node userCardDOM 
    
-        /* mediasCardDOM.addEventListener('click', () => { // au click...
-        // modal lightbox photos, CF. lightbox.js
-        // 
-        }) */
+        console.log(mediasCardDOM);
+        mediasCardDOM.addEventListener('click', () => { // au click...
+            const sourceMediaClicked = mediasCardDOM.querySelector('img').src;
+            const lightBoxImgElement = document.querySelector('.lightbox__container img');
+            lightBoxImgElement.src = sourceMediaClicked;
+            console.log(index);
+            currentLightBoxIndex = index;
+        });
     }); 
+
+    document.querySelector('.lightbox__prev').addEventListener('click', () => {
+        if (currentLightBoxIndex === 0) {
+            currentLightBoxIndex = medias.length - 1;
+        } else {
+            currentLightBoxIndex = currentLightBoxIndex - 1;
+        }
+        const newElement = medias[currentLightBoxIndex];
+        const lightBoxImgElement = document.querySelector('.lightbox__container img');
+        lightBoxImgElement.src = `assets/photographersMedias/${newElement.photographerId}/${newElement.image}`;
+    });
 };
 
 const initMediaData = () => { // --> initPhotographerData returns un seul objet, avec les infos de photographerToDisplay
