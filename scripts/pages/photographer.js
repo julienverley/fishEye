@@ -2,11 +2,10 @@
 /* import { Lightbox } from "./scripts/utils/lightbox.js";
  */
 
-
 /* 
 Main / Photographer card header  
 */
-const displayPhotographer = (photographer) => { // photographer en ref à dataPage // --> displayPhotographer reçoit ce qu'initPhotographerData renvoie comme paramètre
+const displayPhotographer = (photographer) => { // displayPhotographer reçoit ce qu'initPhotographerData renvoie comme paramètre
     const photographerHeader = document.querySelector(".photograph-header"); // ajoute un node userCardDOM 
     const photographerModel = photographerFactoryPage(photographer); // photographerModel = objet photographer avec keys/values
     const userCardDOM = photographerModel.createPhotographerCardDOMPage(); // userCardDOM = objet photographer créé dans le DOM
@@ -25,7 +24,7 @@ const initPhotographerData = () => { // --> initPhotographerData returns un seul
             const photographerUrlId = searchParams.get('id');       
             console.log(photographerUrlId);       
             const photographerToDisplay = photographers.find(element => element.id == photographerUrlId); // display le photographer dont l'ID == l'ID de l'URL cliquée
-            displayPhotographer(photographerToDisplay) // displayPhotographer affiche photographerToDisplay
+            displayPhotographer(photographerToDisplay) // displayPhotographer (autre fonction) affiche photographerToDisplay
         });
 };
 (initPhotographerData()); // ? pourquoi console.log: undedined ?
@@ -65,7 +64,7 @@ const initMediaData = () => { // --> initPhotographerData returns un seul objet,
             // console.log(photographerUrlId);      
             const mediasToDisplay = media.filter(element => element.photographerId == photographerUrlId); // display les medias dont l'ID == l'ID de l'URL cliquée
             console.table(mediasToDisplay); // OK (filter plusieurs éléments ≠ find un seul élément)
-            displayMedias(mediasToDisplay);  // displayMedias affiche mediasToDisplay
+            displayMedias(mediasToDisplay);  // displayMedias (l'autre fonction) affiche mediasToDisplay
         });
        
 };

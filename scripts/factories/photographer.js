@@ -26,7 +26,7 @@ const photographerFactoryPage = (photographerObject) => { // function attend un 
         article.appendChild(button); 
         article.appendChild(img);
 
-        return (article);
+        return (article); // Pourquoi ?? 
     }
     return { // factory function returns un objet 
         name, 
@@ -44,34 +44,39 @@ const photographerFactoryPage = (photographerObject) => { // function attend un 
 Main / Photographer medias 
 */
 const mediasFactoryPage = (mediaObject) => { // function attend un objet à traiter ; assigne les keys values aux 7 variables name, id etc.
-    const { id, photographerId, title, image, likes, date, price } = mediaObject; // ou const name = dataPage.name etc. pour chaque key 
+    const { id, photographerId, title, image, video, likes, date, price } = mediaObject; // ou const name = dataPage.name etc. pour chaque key 
     
     const medias = `assets/photographersMedias/${photographerId}/${image}`; // ajouter ${video}
-    console.table(medias) //
+    
+    console.table(medias) // J'essaye de me baser sur medias pour accéder aux médias avec const links !!??
 
     const createMediasCardDOMPage = () => { // PhotographerCardDOMPage créée dans le DOM
         
         /* const div = document.createElement('href'); 
         href.setAttribute("a", medias) */
         const div = document.createElement('div'); 
+        const a = document.createElement('a'); 
+        a.setAttribute("href", medias); 
+        a.classList.add('lightbox-media'); 
         const img = document.createElement('img');
         img.setAttribute("src", medias)
         const h1 = document.createElement ('h1'); 
         h1.textContent = title; 
-        div.append(img);
+        div.append(a); 
+        a.append(img);
         div.append(h1); 
 
-        return (div); // section
+        return (div); // Pourquoi ? 
     }
     return { // factory function returns un objet  
-        id, 
+       /*  id, 
         photographerId, 
         title, 
         image, //video ?
         likes, 
         date, 
-        price,
-        createMediasCardDOMPage
+        price, */
+        createMediasCardDOMPage // return : j'ai besoin de clarifications  
     }; 
 }
 

@@ -8,3 +8,6 @@ function closeModal() {
     modal.style.display = "none";
 }
 
+
+// ajouter les regex, erreurs, bordures
+

@@ -6,13 +6,14 @@
  * @property {string} url Image actuellement affichée
  **/
 // ajouté : export 
-/* export */ class Lightbox {
+  class Lightbox {
 
-  static init() {
-    const links = Array.from(document.querySelectorAll('a[href$=".jpg"]'))  
+  static init() { // fonctionne mais n'a pas accès au DOM
+    const links = Array.from(document.querySelectorAll('.lightbox-media'))  
     console.log(links);
     console.log(`Ce que contient links: ${links}`)
     const gallery = links.map(link => link.getAttribute('href'))
+    console.log(gallery);
     links.forEach(link => link.addEventListener('click', e => {
         e.preventDefault()
         new Lightbox(e.currentTarget.getAttribute('href'), gallery)
@@ -119,7 +120,6 @@
     dom.querySelector('.lightbox__prev').addEventListener('click', this.prev.bind(this))
     return dom
   }
-
 }
 
 Lightbox.init()
