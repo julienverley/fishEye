@@ -50,7 +50,8 @@ const displayMedias = (medias) => { // medias en ref à dataPage // --> displayM
             lightBoxImgElement.src = sourceMediaClicked;
             console.log(index);
             currentLightBoxIndex = index;
-            displayLightbox(index) // OK, mais depuis, impossible de fermer la modale 
+            
+            displayLightbox() // OK, mais depuis, impossible de fermer la modale 
         });
     }); 
     /**
