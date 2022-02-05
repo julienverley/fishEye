@@ -16,14 +16,13 @@ const photographerFactoryPage = (photographerObject) => { // function attend un 
         h2.textContent = city + ", " + country; 
         const h3 = document.createElement('h3'); 
         h3.textContent = tagline; 
-        const button = document.createElement ('button'); 
-        button.innerHTML = '<button class="contact-button" onclick="displayModal()">Contactez-moi</button>'; 
-
+        const span = document.createElement ('span'); 
+        span.innerHTML = '<button class="contact-button" onclick="displayModal()">Contactez-moi</button>'; 
         article.appendChild(div);
         div.appendChild(h1);
         div.appendChild(h2); 
         div.appendChild(h3); 
-        article.appendChild(button); 
+        article.appendChild(span); 
         article.appendChild(img);
 
         return (article); // Pourquoi ?? 

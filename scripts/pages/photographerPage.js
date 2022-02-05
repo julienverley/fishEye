@@ -1,9 +1,5 @@
 let currentLightBoxIndex = 0;
 
-// ajouté, non lu 
-/* import { Lightbox } from "./scripts/utils/lightbox.js";
- */
-
 /** 
 * Photographer card header  
 */
@@ -25,18 +21,14 @@ const initPhotographerData = () => { // --> initPhotographerData returns un seul
         .then((response) => response.json()) // reçoit l'objet en brut et le transforme en json objet exploitable par js 
         .then((data) => { // les données prêtes à être exploitées, je les utilise  
             const photographers = data.photographers; // = data (photographers) du json ; data.photographers, je les nomme photographers (ou const { photographers } = data)
-            
-            const photographerUrlId = getIdParameter(); // Renvoie à la fonction de urlId.js
-            /* const searchParams = new URLSearchParams(window.location.search); // cf. urlId.js
-            const photographerUrlId = searchParams.get('id'); // cf. urlId.js
-            console.log(photographerUrlId); */ // cf. urlId.js // je m'entraine à appeler des fonctions dans d'autres .js 
-
+            // urlId.js // 
+            const photographerUrlId = getIdParameter(); 
+            // urlId.js // 
             const photographerToDisplay = photographers.find(element => element.id == photographerUrlId); // display le photographer dont l'ID == l'ID de l'URL cliquée
             displayPhotographer(photographerToDisplay) // displayPhotographer (autre fonction) affiche photographerToDisplay
         });
 };
 (initPhotographerData()); // ? pourquoi console.log: undedined ?
-
 
 /* 
 * Photographer medias 
@@ -44,23 +36,23 @@ const initPhotographerData = () => { // --> initPhotographerData returns un seul
 const displayMedias = (medias) => { // medias en ref à dataPage // --> displayMedia reçoit ce qu initMediaData renvoie comme paramètre
     const mediasCards = document.querySelector(".photograph-media-cards"); // ajoute un node userCardDOM 
     
-    // forEach    
-    medias.forEach((media, index) => { // !! CF screenshot deuxième paramètre (media, index) pour naviguer !! 
+    medias.forEach((media, index) => { // !! deuxième paramètre (media, index) pour naviguer 
         const mediasModel = mediasFactoryPage(media); // photographerModel = objet photographer avec keys/values
-        // console.table(mediasModel)
         const mediasCardDOM = mediasModel.createMediasCardDOMPage(); // mediasCardDOM = objet photographer créé dans le DOM
         mediasCards.appendChild(mediasCardDOM); // ajoute un node userCardDOM 
-   
-        console.log(mediasCardDOM);
+       
+        /**
+         * Lightbox click on media to display 
+         */
         mediasCardDOM.addEventListener('click', () => { // au click...
             const sourceMediaClicked = mediasCardDOM.querySelector('img').src;
             const lightBoxImgElement = document.querySelector('.lightbox__container img');
             lightBoxImgElement.src = sourceMediaClicked;
             console.log(index);
             currentLightBoxIndex = index;
+            displayLightbox(index) // OK, mais depuis, impossible de fermer la modale 
         });
     }); 
-
     /**
      * lightbox previous button 
      */
@@ -74,7 +66,6 @@ const displayMedias = (medias) => { // medias en ref à dataPage // --> displayM
         const lightBoxImgElement = document.querySelector('.lightbox__container img');
         lightBoxImgElement.src = `assets/photographersMedias/${newElement.photographerId}/${newElement.image}`;
     });
-
     /**
      * lightbox next button 
      */
@@ -88,6 +79,15 @@ const displayMedias = (medias) => { // medias en ref à dataPage // --> displayM
         const lightBoxImgElement = document.querySelector('.lightbox__container img');
         lightBoxImgElement.src = `assets/photographersMedias/${newElement.photographerId}/${newElement.image}`;
     });
+    /**
+     * Lighbox close button
+     */
+    document.querySelector('.lightbox__close').addEventListener('click'), () => {
+        closeLightbox(); 
+    }
+    
+
+
 };
 
 /**

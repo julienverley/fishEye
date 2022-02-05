@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/contact.css" rel="stylesheet" type="text/css" />
-    <!-- <link rel="stylesheet" href="css/lightbox.css"> -->
+    <link rel="stylesheet" href="css/lightbox.css">
   
     <title>Fisheye - photographe </title>
   </head>
@@ -41,24 +41,27 @@
 
 
 
-    <!--Caroussel slider Modal lightbox-->
-    <div class="lightbox">
-      <button class="lightbox-button lightbox__close">Fermer</button>
+    <!--Lightbox modal-->
+    <div id="lightbox" onclick="displayLightbox()">
+      <button class="lightbox-button lightbox__close" onclick="closeLightbox()">Fermer</button>
       <button class="lightbox-button lightbox__next">Suivant</button>
       <button class="lightbox-button lightbox__prev">Précédent</button>
       <div class="lightbox__container">
-        <img src="https://picsum.photos/id/870/1050/900" alt="">
+        <img src="" alt="">
     </div>
   </div>
 
 
 
-    <!--Form-->
+    <!--Contact form modal-->
     <div id="contact_modal" aria-hidden="true" role="dialog" aria-modal="true">
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <!-- ! Ajouter le nom du photographe en JS ! -->
+          <div>
+            <img src="assets/icons/close.svg" onclick="closeModal()" />
+          </div>
         </header>
 				<form>
 					<div>
@@ -93,7 +96,7 @@
     <!--Utils-->
     <!-- <script src="/scripts/utils/lightbox-grafikart.js" type="module"></script> -->
     <script src="/scripts/utils/urlId.js"></script>
-    <script src="/scripts/utils/lightbox.js" type="module"></script>
+    <script src="/scripts/utils/lightbox.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
 
   </body>

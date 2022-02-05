@@ -1,4 +1,7 @@
-.lightbox {
+#lightbox {
+    
+    display: none;
+
     position: fixed; 
     top: 0; 
     left: 0;
@@ -22,10 +25,10 @@
     right: 10%;
     margin-top: -14px;
     z-index: 11;
-    text-indent: -3000px; /* If I write text */
+    text-indent: -10000px; /* If I write text */
 }
 
-.lightbox__next {
+.lightbox__prev {
     right: auto;
     left: 10%;
     transform: rotate(180deg);
@@ -37,7 +40,7 @@
     border: none;
     background: url(/assets/icons/close-lightbox.svg) center center / 42px no-repeat transparent;
     position: fixed;
-    text-indent: -3000px;
+    text-indent: -10000px;
     top: 7%; 
     right: 10%;
     z-index: 12;
