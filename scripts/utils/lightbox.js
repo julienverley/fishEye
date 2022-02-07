@@ -8,5 +8,5 @@ function closeLightbox() {
     lightbox.style.display = "none";
 }
 
-closeLightbox.addEventListener("click", closeLightbox); // OK // finalement pas OK depuis le displayLightbox(index)
+// closeLightbox.addEventListener("click", closeLightbox); // OK // finalement pas OK depuis le displayLightbox(index)
 /* displayLightbox.addEventListener("click", displayLightbox); // OK */

@@ -79,6 +79,7 @@ object-fit: cover;
         height: 300px;
         width: 350px;
         object-fit: cover;
+        cursor: pointer;
 }
 
 
