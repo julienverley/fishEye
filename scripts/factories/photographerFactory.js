@@ -25,30 +25,80 @@ const photographerFactoryPage = (photographerObject) => { // function attend un 
         article.appendChild(span); 
         article.appendChild(img);
 
-        return (article); // ? 
+        return article
     }
     return { // factory function returns un objet 
         createPhotographerCardDOMPage
     }; 
 }
 
+
+
+const createImageFactoryPage = (mediaObject) => {
+    const { id, photographerId, title, image, likes, date, price } = mediaObject;
+    const images = `assets/photographersMedias/${photographerId}/${image}`;
+
+    const div = document.createElement('div'); 
+    const img = document.createElement('img');
+    img.setAttribute("src", images)
+    const h1 = document.createElement ('h1');
+    h1.textContent = title; 
+
+    div.append(img);
+    div.append(h1);
+    
+    console.log(div)
+    return div 
+}
+// return {imageFactoryPage}; 
+ 
+
+
+const createVideoFactoryPage = (mediaObject) => {
+    const { id, photographerId, title, video, likes, date, price } = mediaObject;
+    const videos = `assets/photographersMedias/${photographerId}/${video}`;
+
+    const div = document.createElement('div'); 
+    const videoElement = document.createElement('video');
+    // Montrer une image miniature de la vidéo // OK ? 
+    // videoElement.insertAdjacentHTML ('afterbegin', 'controls'); // controls à ajouter dans la modale 
+    videoElement.classList.add("video"); 
+    videoElement.setAttribute("src", videos)
+    const h1 = document.createElement ('h1');
+    h1.textContent = title; 
+
+    div.append(videoElement);
+    div.append(h1);
+
+    console.log(div); 
+    return div
+} 
+// return {videoFactoryPage};  
+
+
+
 /* 
 Main / Photographer medias 
 */
-const mediasFactoryPage = (mediaObject) => { // function attend un objet à traiter ; assigne les keys values aux 7 variables name, id etc.
+// A DUPLIQUER, UNE POUR LES IMAGES, UNE POUR LES VIDEOS 
+
+/* const mediasFactoryPage = (mediaObject) => { // function attend un objet à traiter ; assigne les keys values aux 7 variables name, id etc.
     const { id, photographerId, title, image, video, likes, date, price } = mediaObject; // ou const name = dataPage.name etc. pour chaque key 
     
+    // console.log(video); 
+
     const images = `assets/photographersMedias/${photographerId}/${image}`; 
     const videos = `assets/photographersMedias/${photographerId}/${video}`; 
     
-    console.table(images) // J'essaye de me baser sur medias pour accéder aux médias avec const links !!??
+    console.table(images)
 
     const createMediasCardDOMPage = () => { // PhotographerCardDOMPage créée dans le DOM
         
-        if (mediaObject = "image") {
+        if (mediaObject = 'image') { // image même sur video // == 
+            console.log(mediaObject)
             const div = document.createElement('div'); 
             const img = document.createElement('img');
-            img.setAttribute("src", images)
+            img.setAttribute("src", images); 
             const h1 = document.createElement ('h1'); 
             h1.textContent = title; 
     
@@ -57,10 +107,11 @@ const mediasFactoryPage = (mediaObject) => { // function attend un objet à trai
     
             return (div); 
 
-        } if (mediaObject = "video") {
+        } else if (mediaObject = 'video') {
+            console.log(mediaObject); // rien 
             const div = document.createElement('div'); 
             const video = document.createElement('video');
-            img.setAttribute("src", videos)
+            img.setAttribute("src", videos); 
             const h1 = document.createElement ('h1'); 
             h1.textContent = title; 
     
@@ -74,3 +125,4 @@ const mediasFactoryPage = (mediaObject) => { // function attend un objet à trai
         createMediasCardDOMPage //    
     }; 
 }
+*/

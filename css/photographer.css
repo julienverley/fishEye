@@ -47,6 +47,8 @@ border-radius: 100px;
 object-fit: cover;
 }
 
+/* Contact modal */
+
 .contact-button {
     
     font-size: 20px;
@@ -68,6 +70,9 @@ object-fit: cover;
     outline: none;
 }
 
+
+/* Gallery medias */
+
 .photograph-media-cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -75,11 +80,16 @@ object-fit: cover;
     margin-top: 100px;
 }
 
-    .photograph-media-cards div img{
-        height: 300px;
-        width: 350px;
-        object-fit: cover;
-        cursor: pointer;
+ .photograph-media-cards div img{
+    height: 300px;
+    width: 350px;
+    object-fit: cover;
+    cursor: pointer;
 }
 
+.video {
+    width: 350px;
+    height: 300px;
+    cursor: pointer;
+}
 

@@ -17,13 +17,36 @@ const displayPhotographer = (photographer) => { // displayPhotographer reçoit c
 const displayMedias = (medias) => { // medias en ref à dataPage // --> displayMedia reçoit ce qu initMediaData renvoie comme paramètre
     const mediasCards = document.querySelector(".photograph-media-cards"); // ajoute un node userCardDOM 
     
-    medias.forEach((media, index) => { // !! deuxième paramètre (media, index) pour naviguer 
-        const mediasModel = mediasFactoryPage(media); // mediasModel = objet medias avec keys/values
-        const mediasCardDOM = mediasModel.createMediasCardDOMPage(); // mediasCardDOM = objet media créé dans le DOM
-        mediasCards.appendChild(mediasCardDOM); // ajoute un node userCardDOM 
-       
+    // Marco
+    medias.forEach((media, index) => {  
+        if (media.hasOwnProperty("image")) {
+            mediasCards.append(createImageFactoryPage(media))
 
-       
+        } else if (media.hasOwnProperty("video")){
+            mediasCards.append(createVideoFactoryPage(media))
+        }
+
+    // medias.forEach((media, index) => { // !! deuxième paramètre (media, index) pour naviguer 
+            
+        // FOR EACH PASSAIT TOUS LES MEDIAS COMME IMAGE
+        ////////
+
+        const imagesModel = createImageFactoryPage(media); // mediasModel = objet medias avec keys/values
+        console.log(imagesModel)
+        const imagesCardDOM = imagesModel.createImageFactoryPage(); // mediasCardDOM = objet media créé dans le DOM
+        mediasCards.appendChild(imagesCardDOM); // ajoute un node userCardDOM 
+
+        const videosModel = createVideoFactoryPage(media); // mediasModel = objet medias avec keys/values
+        console.log(videosModel)
+        const videosCardDOM = imagesModel.createVideoFactoryPage(); // mediasCardDOM = objet media créé dans le DOM
+        mediasCards.appendChild(mediasCardDOM); // ajoute un node userCardDOM 
+        
+        /* const mediasModel = createImageFactoryPage(media); // mediasModel = objet medias avec keys/values
+        console.log(mediasModel)
+        const mediasCardDOM = mediasModel.createMediasCardDOMPage(); // mediasCardDOM = objet media créé dans le DOM
+        mediasCards.appendChild(mediasCardDOM); // ajoute un node userCardDOM  */
+
+        
         /**
          * Lightbox click on media to display 
          */
@@ -36,7 +59,14 @@ const displayMedias = (medias) => { // medias en ref à dataPage // --> displayM
             
             displayLightbox() // OK 
         });
+
     }); 
+    // Marco 
+    
+    
+
+        /////////
+    /* }); */ 
     /**
      * lightbox previous button 
      */
@@ -66,9 +96,9 @@ const displayMedias = (medias) => { // medias en ref à dataPage // --> displayM
     /**
      * Lighbox close button
      */
-    document.querySelector('.lightbox__close').addEventListener('click'), () => { // ? Manque un argument ? 
+    document.querySelector('.lightbox__close').addEventListener('click', () => { // ? Manque un argument ? 
         closeLightbox(); 
-    }
+    }); 
     
 };
 
