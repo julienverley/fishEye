@@ -1,5 +1,5 @@
-/* 
-Main / Photographer card header  
+/** 
+* Photographer header card DOM
 */
 const photographerFactoryPage = (photographerObject) => { // function attend un objet à traiter ; assigne les keys values aux 7 variables name, id etc.
     const { name, id, portrait, city, country, tagline, price } = photographerObject; // ou const name = dataPage.name etc. pour chaque key 
@@ -33,96 +33,49 @@ const photographerFactoryPage = (photographerObject) => { // function attend un 
 }
 
 
-
-const createImageFactoryPage = (mediaObject) => {
+/**
+ * Photographer gallery DOM
+ */ 
+const createImageFactoryPage = (mediaObject) => { // faire un MAP, cf. Fromscratch 3/6 2'05
     const { id, photographerId, title, image, likes, date, price } = mediaObject;
     const images = `assets/photographersMedias/${photographerId}/${image}`;
+ 
+    const div = document.createElement('div'); // -> figure
+    div.classList.add("lighbox-element"); 
 
-    const div = document.createElement('div'); 
-    const img = document.createElement('img');
-    img.setAttribute("src", images)
-    const h1 = document.createElement ('h1');
-    h1.textContent = title; 
+    const imageElement = document.createElement('img');
+    imageElement.setAttribute("src", images)
 
-    div.append(img);
-    div.append(h1);
+    // -> figcaption ... ... ... ... *** *** *** *** 
+
+    const h1 = document.createElement ('h1'); // const mediaTitle = document.createElement ('mediaTitle'); CSS : h1
+    h1.textContent = title; // mediaTitle.textContent = title; 
+
+    // const mediaLikes = document.createElement ('mediaLikes'); CSS : h1 
+    // mediaLikes.textContent = likes; + heart fontAwesome
+
+    div.appendChild(imageElement); // append ?
+    div.appendChild(h1);
     
-    console.log(div)
     return div 
 }
-// return {imageFactoryPage}; 
  
-
-
 const createVideoFactoryPage = (mediaObject) => {
     const { id, photographerId, title, video, likes, date, price } = mediaObject;
     const videos = `assets/photographersMedias/${photographerId}/${video}`;
 
     const div = document.createElement('div'); 
-    const videoElement = document.createElement('video');
-    // Montrer une image miniature de la vidéo // OK ? 
-    // videoElement.insertAdjacentHTML ('afterbegin', 'controls'); // controls à ajouter dans la modale 
+    div.classList.add("lighbox-element"); 
+    const videoElement = document.createElement('video'); // image miniature
+    
     videoElement.classList.add("video"); 
     videoElement.setAttribute("src", videos)
-    const h1 = document.createElement ('h1');
+    const h1 = document.createElement('h1');
     h1.textContent = title; 
+    // h1.textContent = likes; 
 
-    div.append(videoElement);
-    div.append(h1);
+    div.appendChild(videoElement);
+    div.appendChild(h1);
 
-    console.log(div); 
     return div
 } 
-// return {videoFactoryPage};  
-
-
-
-/* 
-Main / Photographer medias 
-*/
-// A DUPLIQUER, UNE POUR LES IMAGES, UNE POUR LES VIDEOS 
-
-/* const mediasFactoryPage = (mediaObject) => { // function attend un objet à traiter ; assigne les keys values aux 7 variables name, id etc.
-    const { id, photographerId, title, image, video, likes, date, price } = mediaObject; // ou const name = dataPage.name etc. pour chaque key 
-    
-    // console.log(video); 
-
-    const images = `assets/photographersMedias/${photographerId}/${image}`; 
-    const videos = `assets/photographersMedias/${photographerId}/${video}`; 
-    
-    console.table(images)
-
-    const createMediasCardDOMPage = () => { // PhotographerCardDOMPage créée dans le DOM
-        
-        if (mediaObject = 'image') { // image même sur video // == 
-            console.log(mediaObject)
-            const div = document.createElement('div'); 
-            const img = document.createElement('img');
-            img.setAttribute("src", images); 
-            const h1 = document.createElement ('h1'); 
-            h1.textContent = title; 
-    
-            div.append(img);
-            div.append(h1); 
-    
-            return (div); 
-
-        } else if (mediaObject = 'video') {
-            console.log(mediaObject); // rien 
-            const div = document.createElement('div'); 
-            const video = document.createElement('video');
-            img.setAttribute("src", videos); 
-            const h1 = document.createElement ('h1'); 
-            h1.textContent = title; 
-    
-            div.append(video);
-            div.append(h1); 
-    
-            return (div); 
-        }
-    }
-    return { // factory function returns un objet  
-        createMediasCardDOMPage //    
-    }; 
-}
-*/

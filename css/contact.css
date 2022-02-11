@@ -2,8 +2,8 @@
 
 .modal {
     position: fixed;
-    top: 2vh; 
-    bottom: 2vh;
+    height: 900px; 
+    top: 5vh;
     left:15%; 
 
     border-radius: 5px;

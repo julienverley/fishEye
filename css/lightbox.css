@@ -69,6 +69,11 @@
     height: auto;
 }
 
+.lightbox__container video {
+    max-width: 100%;
+    height: auto;
+}
+
 @keyframes lightboxIn {
     from {opacity: 0;}
     to {opacity: 1;}

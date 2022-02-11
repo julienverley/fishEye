@@ -23,18 +23,31 @@
     </header>
    
     <main id="main" class="main">
+
       <!--Photographer header-->
       <section class="photograph-header" role="region" aria-label="photographer information">
-        <!--<button class="contact-button" onclick="displayModal()">Contactez-moi</button>-->
       </section>
-      <!--Button sort popularité/date/titre-->
-      <div class="select-box" role="listbox">
+
+      <!--Button sort popularité/date/titre--><div class="select-box" role="listbox"></div>
+      <div id="sort">
+        <label id="listbox-label" for="listbox-container">Trier par
+          <div id="listbox-container" role="button"><!--ajouter aria--> 
+            <span id="listbox-current-option">Popularité</span>
+            <div role="listbox" id="listbox" tabindex="-1"><!--ajouter tabindex et aria--> 
+              <div class="listbox-option" role="option" data-sort="popularity" id="listbox-popularity">Popularité</div><!--ajouter tabindex--> 
+              <div class="listbox-option" role="option" data-sort="date" id="listbox-date">Date</div><!--ajouter tabindex--> 
+              <div class="listbox-option" role="option" data-sort="title" id="listbox-title">Titre</div><!--ajouter tabindex--> 
+            </div>
+          </div>
+        </label> 
       </div>
+
       <!--Photographer medias-->
       <section class="photograph-media-cards" role="region" aria-label="medias catalog">
       </section>
+      
       <!--Photographer likes & price-->
-      <footer class="footer" role="">
+      <footer class="likes-price" role="contentinfo">
       </footer>
 
     </main>
@@ -46,9 +59,8 @@
       <button class="lightbox-button lightbox__next">Suivant</button>
       <button class="lightbox-button lightbox__prev">Précédent</button>
       <button class="lightbox-button lightbox__close" onclick="closeLightbox()">Fermer</button><!--onclick="closeLightbox()"-->
-      <div class="lightbox__container">
-        <img src="" alt="">
-    </div>
+      <div class="lightbox__container"></div>
+      <div class="lightbox-media-title"></div>
   </div>
 
 
