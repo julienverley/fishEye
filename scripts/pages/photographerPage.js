@@ -10,15 +10,17 @@
         .then((data) => { // données à exploiter, on les utilise : 
             const searchParams = new URLSearchParams(window.location.search);
             const photographerId = searchParams.get('id');
-            const mediasToDisplay = data.media.filter(element => element.photographerId == photographerId);
             const photographerToDisplay = data.photographers.find(element => element.id == photographerId);
+            const mediasToDisplay = data.media.filter(element => element.photographerId == photographerId);
             displayPhotographer(photographerToDisplay);
             displayMedias(mediasToDisplay);
         });
 }
 initPhotographerPage();
 
-
+/**
+ * Variables 
+ */
 
 let currentLightboxIndex = 0;
 const imgRegex = /^.*\.(jpg)$/
@@ -44,7 +46,7 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
    
     /** Gallery **
     /** 
-    * Gallery, create image or video into the DOM
+    * Gallery, create card-image or card-video (DOM)
     */
     medias.forEach((media) => { 
         if (media.hasOwnProperty("image")) { // return boolean true of false, if media = image...
@@ -63,12 +65,20 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
         
         div.addEventListener('click', () => {          
             const sourceMediaClicked = div.firstChild.src; 
+            const titleMediaClicked = div.firstChild.nextSibling.textContent // OK
+            console.log(div);
+            console.log(titleMediaClicked);
            
             if(sourceMediaClicked.match(imgRegex)){
                 const img = document.createElement('img')
-                img.src = sourceMediaClicked
                 const lightboxContainer = document.querySelector('.lightbox__container')
+                img.src = sourceMediaClicked
                 lightboxContainer.append(img)
+
+                
+                document.getElementsByClassName("lightbox-media-title").innerHTML = "<h1>${titleMediaClicked}<h1/>" // But, afficher modal media title /////////////////
+                console.log(titleMediaClicked) // OK "title" affiché, mais il n'apparait pas dans la lightbox 
+                
                 currentLightboxIndex = index;
                 displayLightbox()
             } else if(sourceMediaClicked.match(videoRegex)){
@@ -93,7 +103,7 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
             currentLightboxIndex = currentLightboxIndex - 1; // ou currentLightboxIndex --
         }
 
-        const newElement = mediasCardsChildren[currentLightboxIndex]; // = div index[] //////////////// 
+        const newElement = mediasCardsChildren[currentLightboxIndex]; // = div index[] // A revoir // 
         const newElementSrc = newElement.firstChild.src // = src URL of newElement index [] media
 
         const lightboxContainer = document.querySelector('.lightbox__container')
@@ -148,7 +158,7 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
     
 };
 
-
 // Filtres popularité, likes, date
 // méthode sort, avec a et b, array.sort((a, b) => a - b)); cf. Fromscratch 3/6 1'53, object 2'09 ! 
 // Sort, dates, Fromscratch 3/6 2'49
+// Date destructuring 3'06

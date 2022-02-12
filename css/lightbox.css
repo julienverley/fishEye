@@ -1,7 +1,5 @@
-#lightbox {
-    
+#lightbox {    
     display: none;
-
     position: fixed; 
     top: 0; 
     left: 0;
@@ -59,14 +57,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    margin-left: 15%; 
-    margin-right: 15%;
+    min-height: 90vh;
+    margin: 5% 15%; 
 }
 
 .lightbox__container img {
     max-width: 100%;
-    height: auto;
+    height: 86vh;
+    object-fit: cover;
 }
 
 .lightbox__container video {
@@ -85,3 +83,9 @@
     opacity: .5; 
     background: url(images/loader.svg) center center no-repeat;
 } */
+
+.lightbox-media-title {
+    bottom: 10px;
+    z-index: 1000;
+    background-color: black;
+}
