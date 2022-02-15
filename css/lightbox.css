@@ -55,10 +55,11 @@
 
 .lightbox__container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
     min-height: 90vh;
-    margin: 5% 15%; 
+    margin: 8% 15%; 
 }
 
 .lightbox__container img {
@@ -70,6 +71,12 @@
 .lightbox__container video {
     max-width: 100%;
     height: auto;
+}
+
+.lightbox__container h2 {
+    color: #901C1C;
+    font-size: 31px;
+    display: flex;
 }
 
 @keyframes lightboxIn {
@@ -87,5 +94,6 @@
 .lightbox-media-title {
     bottom: 10px;
     z-index: 1000;
+    color: white;
     background-color: black;
 }
