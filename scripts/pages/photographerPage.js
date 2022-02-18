@@ -4,8 +4,12 @@
  let currentLightboxIndex = 0;
  const imgRegex = /^.*\.(jpg)$/
  const videoRegex = /^.*\.(mp4)$/
- 
+ const footer = document.querySelector(".footer"); 
+
+
+
  let mediasLikesTotal = 0; 
+ console.log(mediasLikesTotal); 
 
 /**
  * Init photographer et medias datas
@@ -19,14 +23,16 @@
         .then((data) => { // données à exploiter, on les utilise : 
             const searchParams = new URLSearchParams(window.location.search);
             const photographerId = searchParams.get('id');
-            const photographerToDisplay = data.photographers.find(element => element.id == photographerId); // element ?
+            const photographerToDisplay = data.photographers.find(element => element.id == photographerId); // element
             const mediasToDisplay = data.media.filter(element => element.photographerId == photographerId);
 
             const priceToDisplay = photographerToDisplay.price
+            //const likesToDisplay = mediasToDisplay.likes 
         
-            displayPhotographer(photographerToDisplay); // 
+            displayPhotographer(photographerToDisplay);
             displayMedias(mediasToDisplay);
-            displayPrice(priceToDisplay)
+            displayPrice(priceToDisplay); 
+            // displayLikes(likesToDisplay); 
         });
 }
 initPhotographerPage();
@@ -44,8 +50,8 @@ const displayPhotographer = (photographer) => { // displayPhotographer reçoit c
 /** Footer
 * Footer price display
 */
+
 const displayPrice = (price) => { 
-    const footer = document.querySelector(".footer"); 
     const divPrice = document.createElement('div'); 
     divPrice.classList.add('price')
     const priceCardDOM =`<h2>${price}€ / jour</h2>`;   
@@ -76,20 +82,51 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
 
     //////////////////////////////////////////////////////////////////////////////
     
-    const mediasLikes = figure.getElementsByTagName('h2')[1].textContent; 
-    // console.log(+mediasLikes); // typeof = 10 strings, puis 10 numbers with + 
-    let mediasLikesNumber = parseInt(mediasLikes, 10); 
-    mediasLikesTotal += mediasLikesNumber; // typeof = 10 numbers
+    const mediasLikes = figure.getElementsByTagName('h2')[1].textContent; // méthode eval(mediaLikes.textcontent) ? cf. Fromscratch 2/6 2'55
+    console.log(mediasLikes); // string
+    let mediasLikesNumber = parseInt(mediasLikes, 10); // typeof = 10 numbers
+    mediasLikesTotal += mediasLikesNumber; // Pb : 10 résultats incrémentés ; dernier résultat exploitable ///////////////////////////////
+    //mediasLikesTotalDisplay.textContent = mediasLikesTotal; 
+    
+    //mediasLikesTotal.textContent += mediasLikes.textContent;  
+    //mediasLikesTotal.textContent = eval(mediasLikesTotal.textContent)
+    console.log(mediasLikesTotal); // number // Fromscracth FS 2/6 4'26
     // const getTotalLikes = 
+        
+        /* const hearts = document.querySelectorAll(".heart"); 
+        hearts.forEach((heart) => { // à chaque .heart, j'applique cette logique 
+            heart.addEventListener('click', (e) => {})
+        }) */
     
         figure.querySelector('.heart').addEventListener('click', (e) => {
-            /* if (figure a la classe "isliked") {
-                mediasLikesTotal--
-                enleve class isliked
-            }
-            mediasLikesTotal++
-            donner class sliked */
+            // console.log(mediasLikesNumber); 
+            // figure.classList.add("is_liked"); 
+            figure.classList.toggle("is_liked"); // toute la card
+            if (figure.classList.contains("is_liked")) {
+                //mediasLikesNumber += 1 // ok console, pas dans le DOM
+                mediasLikesNumber += 1 // problème : +0 puis +1 
+                figure.getElementsByTagName('h2')[1].textContent = mediasLikesNumber
+                // mediasLikes = mediasLikesNumber // ? ne fonctionne pas ?
+                mediasLikesTotal++
+                removeTotalLikes()
+                updateTotalLikes()
+                console.log(mediasLikesNumber); // number
 
+            } else { 
+                //mediasLikesNumber -= 1 // ok console, pas dans le DOM
+                mediasLikesNumber -= 1
+                figure.getElementsByTagName('h2')[1].textContent = mediasLikesNumber
+                // mediasLikes = mediasLikesNumber // ? ne fonctionne pas ?
+                mediasLikesTotal--
+                removeTotalLikes()
+                updateTotalLikes()
+                console.log(mediasLikesNumber); // number
+
+             }
+            
+             /*
+            mediasLikesTotal++
+            donner class is_not_liked */
         })
 
     //////////////////////////////////////////////////////////////////////////////
@@ -128,6 +165,55 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
             }
         })
     }
+
+    /**
+     * Total likes display DOM
+     */
+    const displayTotalLikes = () => {     
+        const divLikes = document.createElement('div'); 
+        divLikes.classList.add('total_likes')
+        const mediasLikesTotalCardDOM = `<h2 id="likes">${mediasLikesTotal}</h2>
+                                        <div class="heart filter_icons"><i class="fa fa-heart fa-lg"></i></div>`;
+        divLikes.innerHTML = mediasLikesTotalCardDOM; 
+        footer.append(divLikes); 
+    }
+    displayTotalLikes(); // En dehors de la boucle, pour afficher le dernier résultat 
+
+    /**
+     * Total likes upadate
+     */
+    const removeTotalLikes = () => { // cf. react useStat // 
+        document.getElementById('likes').textContent = ""
+    }
+    const updateTotalLikes = () => {
+        document.getElementById('likes').textContent = mediasLikesTotal
+    }
+
+
+
+
+    ///////////////////////////////////  Tri  ///////////////////////////////////  
+
+
+    console.log(document.querySelectorAll(".photograph-media-cards > figure")) // NodeList []
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     
      /** 
@@ -248,9 +334,13 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
 
 
 
+
+
 // Likes cf. Fromscratch 1/6 (last 10')
 
 // Filtres popularité, likes, date
 // méthode sort, avec a et b, array.sort((a, b) => a - b)); cf. Fromscratch 3/6 1'53, object 2'09 ! 
 // Sort, dates, Fromscratch 3/6 2'49
 // Date destructuring 3'06
+// Keypress event Fromscratch 2/6 1'29
+// Sort, <select> et <option> X3

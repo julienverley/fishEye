@@ -59,7 +59,6 @@ const createLikesFactoryPage = (mediaObject) => {
 /**
  * Photographer gallery DOM
  */ 
-
 const createImageFactoryPage = (mediaObject) => { // cf. Fromscratch 3/6 2'02
     const { id, photographerId, title, image, likes, date, price } = mediaObject;
     // const images = `assets/photographersMedias/${photographerId}/${image}`;
@@ -72,7 +71,7 @@ const createImageFactoryPage = (mediaObject) => { // cf. Fromscratch 3/6 2'02
         <div>
             <h2>${title}</h2>
             <div>
-                <h2 class="likes is-liked">${likes}</h2>
+                <h2 class="likes">${likes}</h2>
                 <div class="heart filter_icons"><i class="fa fa-heart fa-lg"></i></div>
             </div>
         </div>`; 
@@ -93,8 +92,8 @@ const createVideoFactoryPage = (mediaObject) => {
         <div>
             <h2>${title}</h2>
             <div>
-                <h2>${likes}</h2>
-                <div class="filter_icons heart"><i class="fa fa-heart fa-lg"></i></div>
+                <h2 class="likes">${likes}</h2>
+                <div class="heart filter_icons heart"><i class="fa fa-heart fa-lg"></i></div>
             </div>
         </div>`;   
 

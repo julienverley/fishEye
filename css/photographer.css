@@ -3,7 +3,7 @@
 }
 
 #main {
-    margin: 0 100px;
+    margin: 0 50px;
 }
 
 
@@ -22,7 +22,7 @@
     flex-direction: row; /* à revoir */ 
     align-items: center;
     justify-content: space-between;
-    margin: 0 3%;
+    margin: 0;
     padding: 25px 0;
 }
 
@@ -94,14 +94,15 @@ object-fit: cover;
     font-style: normal;
     font-variant: normal;
     text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    /* */
-    margin-left: vh
+  }
+  #listbox-container:hover {
+    color: black;
+    background-color:#D3573C;
   }
   #listbox-container:hover > #listbox-current-option {
     color: black;
+    background-color:#D3573C;
   }
   #listbox-container:focus {
     outline: 2px solid #D3573C;
@@ -158,6 +159,7 @@ object-fit: cover;
 .photograph-media-cards { /* ... */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    /* grid-template-columns: 33% 33% 33%; */
     margin-top: 50px;
 }
 
@@ -181,6 +183,7 @@ object-fit: cover;
 .photograph-media-cards figure div h2 {
     width: 80%; 
     margin: 0; 
+    font-size: 24px;
     color: #901C1C;
 }
 
@@ -206,6 +209,10 @@ object-fit: cover;
     cursor: pointer;
     /* object-fit: cover; */
 }
+
+/* .is_liked {
+    /* background-color: #DB8876;
+} */
 
 
 /* Likes price footer */
