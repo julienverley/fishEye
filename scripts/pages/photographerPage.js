@@ -64,6 +64,7 @@ const displayPrice = (price) => {
 */
 const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotographerPage renvoie comme paramètre
     const mediasCards = document.querySelector(".photograph-media-cards"); // ajoute un node mediasCards 
+    console.log(mediasCards);
 
     /** Gallery **
     * Gallery, create card-image or card-video (DOM)
@@ -77,26 +78,23 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
     }); 
 
      
+    
     const mediasCardsChildren = document.querySelectorAll(".photograph-media-cards > figure")
+    
     for (const [index, figure] of mediasCardsChildren.entries()) { // [index = key, figure = value]
 
     //////////////////////////////////////////////////////////////////////////////
-    
-    const mediasLikes = figure.getElementsByTagName('h2')[1].textContent; // méthode eval(mediaLikes.textcontent) ? cf. Fromscratch 2/6 2'55
-    console.log(mediasLikes); // string
+    ////////////////////////////////////////////////////////////////////////////// Sortir de cette fonction ?
+    const mediasLikes = figure.getElementsByTagName('h2')[1].textContent; 
+    // console.log(mediasLikes); // string
     let mediasLikesNumber = parseInt(mediasLikes, 10); // typeof = 10 numbers
-    mediasLikesTotal += mediasLikesNumber; // Pb : 10 résultats incrémentés ; dernier résultat exploitable ///////////////////////////////
-    //mediasLikesTotalDisplay.textContent = mediasLikesTotal; 
-    
-    //mediasLikesTotal.textContent += mediasLikes.textContent;  
-    //mediasLikesTotal.textContent = eval(mediasLikesTotal.textContent)
+    console.log(mediasLikesNumber); // Number cf. tri 
+    mediasLikesTotal += mediasLikesNumber; // 10 résultats incrémentés
     console.log(mediasLikesTotal); // number // Fromscracth FS 2/6 4'26
-    // const getTotalLikes = 
-        
-        /* const hearts = document.querySelectorAll(".heart"); 
-        hearts.forEach((heart) => { // à chaque .heart, j'applique cette logique 
-            heart.addEventListener('click', (e) => {})
-        }) */
+    const mediasTitles = figure.getElementsByTagName('h2')[0].textContent;
+    console.log(mediasTitles); // string cf. tri
+    //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
     
         figure.querySelector('.heart').addEventListener('click', (e) => {
             // console.log(mediasLikesNumber); 
@@ -123,13 +121,8 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
                 console.log(mediasLikesNumber); // number
 
              }
-            
-             /*
-            mediasLikesTotal++
-            donner class is_not_liked */
         })
 
-    //////////////////////////////////////////////////////////////////////////////
 
         /** Lightbox **
         * Lightbox, click on media to display 
@@ -190,28 +183,75 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
     }
 
 
+/* 
+    console.log(mediasLikesNumber);
+    console.log(mediasTitles);
+ */
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    const listboxContainer = document.getElementById('listbox-container')
+    console.log(listboxContainer.value)
+    listboxContainer.addEventListener('change', (e) => {
+        console.log(listboxContainer.value)
+        if (listboxContainer.value == "title") {
+            const sortTitles = []
+
+            for (const [index, figure] of mediasCardsChildren.entries()) {
+                    sortTitles.push(figure.getElementsByTagName('h2')[0].textContent)
+                    
+                }
+                sortTitles.sort() 
+                console.log(sortTitles) ///////////////////////////////// Comment afficher ces titles triés dans le DOM ??
+
+                
+            } else if (listboxContainer.value == "popularity") {
+
+            }
+    })
 
     ///////////////////////////////////  Tri  ///////////////////////////////////  
 
+    // Cf. const mediasTitles string line 93
+    // Cf. const mediasLikesNumber number line 88
 
-    console.log(document.querySelectorAll(".photograph-media-cards > figure")) // NodeList []
+/* 
+    const displaySortedMedias = () => {
 
+        const mediasNodes = document.querySelectorAll(".photograph-media-cards > figure")
+        console.log(mediasNodes) // NodeList []
+    
+        const mediasTitles = mediasNodes.getElementsByTagName('h2')[0].textContent; // non car c'est un tableau d'objets ///////////////
+        console.log(mediasTitles); /////////////////////////////////////////////////// Chercher les titles déjà affichés
+        // titles : utiliser locale.compare 
 
+        const mediaFilters = document.querySelectorAll(".listbox-option"); 
+        console.log(mediaFilters);
+        
+        
+        mediaFilters.forEach((mediaFilter) => {
+            console.log(mediaFilter);
 
+            mediaFilter.addEventListener("click", () => {
+                
+                if (mediaFilter.value === "Popularité") { // if (document.getElementById('listbox-popularity'))
+                    console.log(mediaFilter.value); // rien 
+                    displayMedias.sort(function (a,b) {
+                        return a.mediasLikesNumber - b.mediasLikesNumber; // tri par likesNumber mais pas par card ?
+                    });  
+                } else if (mediaFilter.value === "Titre") {
+                    console.log(mediaFilter.value); // rien 
+                    displayMedias.sort(function (a,b) {
+                        return a.title.localeCompare(b.title) /////////////////////////// A reformuler "title" 
+                    } 
+                }
+            })
+        }); 
+    }
+    displaySortedMedias(); 
+  */
 
-
-
-
-
-
-
-
-
-
-
-
-
+    ///////////////////////////////////  Tri  ///////////////////////////////////  
 
 
 

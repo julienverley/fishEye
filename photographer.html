@@ -32,13 +32,16 @@
       <div class="select-box" role="listbox"></div>
       <div id="sort">
         <label id="listbox-label" for="listbox-container">Trier par
-          <div id="listbox-container" role="button"><!--ajouter aria--> 
-            <span id="listbox-current-option">Popularité</span>
-            <div role="listbox" id="listbox" tabindex="-1"><!--ajouter tabindex et aria--> 
-              <div class="listbox-option" role="option" data-sort="popularity" id="listbox-popularity">Popularité</div><!--ajouter tabindex--> 
-              <div class="listbox-option" role="option" data-sort="title" id="listbox-title">Titre</div><!--ajouter tabindex--> 
-            </div>
-          </div>
+          <select id="listbox-container" role="button"><!--ajouter aria--> 
+            <option class="listbox-option" role="option" data-sort="popularity" id="listbox-popularity" value="popularity">Popularité</option>
+            <option class="listbox-option" role="option" data-sort="title" id="listbox-title" value="title">Titre</option>
+
+            <!-- <span id="listbox-current-option">Popularité</span> -->
+            <!-- <div role="listbox" id="listbox" tabindex="-1"> --><!--ajouter tabindex et aria--> 
+              <!-- <div class="listbox-option" role="option" data-sort="popularity" id="listbox-popularity">Popularité</div> --><!--ajouter tabindex--> 
+              <!-- <div class="listbox-option" role="option" data-sort="title" id="listbox-title">Titre</div> --><!--ajouter tabindex--> 
+            <!-- </div> -->
+          </select>
         </label> 
       </div>
 

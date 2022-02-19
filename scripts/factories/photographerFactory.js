@@ -33,29 +33,6 @@ const photographerFactoryPage = (photographerObject) => { // function attend un 
     }; 
 }
 
-//////////////////////////////////////////////////////////////////////////////
-/**
- * Likes footer DOM
- */ 
-
-/* 
-const createLikesFactoryPage = (mediaObject) => { 
-    const { likes } = mediaObject; // const likes = dataPage.likes; 
-
-    const footer = document.createElement('footer'); 
-
-    const createLikesFactoryPageDOM = 
-    `<div>
-        <h2>${likes}</h2>
-        <div class="heart filter_icons"><i class="fa fa-heart fa-lg"></i></div>        
-    </div>`;   
-    
-    footer.innerHTML = createLikesFactoryPageDOM; 
-    return createLikesFactoryPageDOM
-}
- */
-//////////////////////////////////////////////////////////////////////////////
-
 /**
  * Photographer gallery DOM
  */ 
