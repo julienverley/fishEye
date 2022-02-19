@@ -59,12 +59,17 @@ const displayPrice = (price) => {
     footer.append(divPrice); 
 }
 
+
+
+
 /** Medias **
 * Medias Photographer display
 */
 const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotographerPage renvoie comme paramètre
     const mediasCards = document.querySelector(".photograph-media-cards"); // ajoute un node mediasCards 
     console.log(mediasCards);
+
+    // ordonner par défaut par likes
 
     /** Gallery **
     * Gallery, create card-image or card-video (DOM)
@@ -159,6 +164,48 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
         })
     }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const listboxContainer = document.getElementById('listbox-container')
+console.log(listboxContainer.value)
+listboxContainer.addEventListener('change', (e) => {
+    console.log(listboxContainer.value)
+    if (listboxContainer.value == "title") {
+        medias.sort(function(a, b){
+            if(a.title < b.title) { return -1; }
+            if(a.title > b.title) { return 1; }
+            return 0;
+        });
+        console.log(medias);
+        mediasCards.innerHTML = '';
+        medias.forEach((media) => { 
+            if (media.hasOwnProperty("image")) { // return boolean true of false, if media = image...
+                mediasCards.append(createImageFactoryPage(media)) // ...create DOM image element
+            } else if (media.hasOwnProperty("video")){ // else if media = video...
+                mediasCards.append(createVideoFactoryPage(media)) // ...create DOM video element
+            }
+        }); 
+    } else if (listboxContainer.value == "popularity") {
+        medias.sort(function(a, b){
+            if(a.likes > b.likes) { return -1; }
+            if(a.likes < b.likes) { return 1; }
+            return 0;
+        });
+        mediasCards.innerHTML = '';
+        medias.forEach((media) => { 
+            if (media.hasOwnProperty("image")) { // return boolean true of false, if media = image...
+                mediasCards.append(createImageFactoryPage(media)) // ...create DOM image element
+            } else if (media.hasOwnProperty("video")){ // else if media = video...
+                mediasCards.append(createVideoFactoryPage(media)) // ...create DOM video element
+            }
+        });
+        
+    }
+})
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     /**
      * Total likes display DOM
      */
@@ -183,111 +230,13 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
     }
 
 
-/* 
-    console.log(mediasLikesNumber);
-    console.log(mediasTitles);
- */
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    const listboxContainer = document.getElementById('listbox-container')
-    console.log(listboxContainer.value)
-    listboxContainer.addEventListener('change', (e) => {
-        console.log(listboxContainer.value)
-        if (listboxContainer.value == "title") {
-            const sortTitles = []
-
-            for (const [index, figure] of mediasCardsChildren.entries()) {
-                    sortTitles.push(figure.getElementsByTagName('h2')[0].textContent)
-                    
-                }
-                sortTitles.sort() 
-                console.log(sortTitles) ///////////////////////////////// Comment afficher ces titles triés dans le DOM ??
-
-                
-            } else if (listboxContainer.value == "popularity") {
-
-            }
-    })
-
-    ///////////////////////////////////  Tri  ///////////////////////////////////  
-
-    // Cf. const mediasTitles string line 93
-    // Cf. const mediasLikesNumber number line 88
-
-/* 
-    const displaySortedMedias = () => {
-
-        const mediasNodes = document.querySelectorAll(".photograph-media-cards > figure")
-        console.log(mediasNodes) // NodeList []
-    
-        const mediasTitles = mediasNodes.getElementsByTagName('h2')[0].textContent; // non car c'est un tableau d'objets ///////////////
-        console.log(mediasTitles); /////////////////////////////////////////////////// Chercher les titles déjà affichés
-        // titles : utiliser locale.compare 
-
-        const mediaFilters = document.querySelectorAll(".listbox-option"); 
-        console.log(mediaFilters);
-        
-        
-        mediaFilters.forEach((mediaFilter) => {
-            console.log(mediaFilter);
-
-            mediaFilter.addEventListener("click", () => {
-                
-                if (mediaFilter.value === "Popularité") { // if (document.getElementById('listbox-popularity'))
-                    console.log(mediaFilter.value); // rien 
-                    displayMedias.sort(function (a,b) {
-                        return a.mediasLikesNumber - b.mediasLikesNumber; // tri par likesNumber mais pas par card ?
-                    });  
-                } else if (mediaFilter.value === "Titre") {
-                    console.log(mediaFilter.value); // rien 
-                    displayMedias.sort(function (a,b) {
-                        return a.title.localeCompare(b.title) /////////////////////////// A reformuler "title" 
-                    } 
-                }
-            })
-        }); 
-    }
-    displaySortedMedias(); 
-  */
-
-    ///////////////////////////////////  Tri  ///////////////////////////////////  
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// const listboxContainer ... (mis au dessus )
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-    
-     /** 
-     * Lightbox, close on Escape key 
-     */
-    document.addEventListener('keyup', (event) => {
-        event.preventDefault()
-        console.log(event.code); 
-        if (event.code === "Escape") {
-            closeLightbox(); 
-        }
-    }); 
-/*     
-    document.addEventListener('keyup', (event) => {
-        console.log(event.code); 
-        if (event.code === "ArrowLeft") {
-            // Créer une fonction lightboxPrev(); 
-        }
-    }); 
-    
-    document.addEventListener('keyup', (event) => {
-        console.log(event.code); 
-        if (event.code === "ArrowRight") {
-            // Créer une fonction lightboxNext(); 
-        }
-    }); 
- */
-
-    /**
-     * lightbox, previous button 
-     */
-
-    document.querySelector('.lightbox__prev').addEventListener('click', () => {
-        
+    const lightboxPrevious = () => {
         if (currentLightboxIndex === 0) { // lorsque index[0] (et que click previous)... 
             currentLightboxIndex = medias.length - 1; // ... index[last] 
         } else {
@@ -319,12 +268,9 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
             console.log(h2) // +
             lightboxContainer.append(h2) // +
         }
-    });
+    };
 
-    /**
-     * lightbox, next button 
-     */     
-    document.querySelector('.lightbox__next').addEventListener('click', () => {
+    const lightBoxNext = () => {
         if (currentLightboxIndex === medias.length - 1) { // lorsque index[0] (et que click previous)... 
             currentLightboxIndex = medias.length - medias.length; // ... index[last] 
         } else {
@@ -356,6 +302,47 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
             console.log(h2) // +
             lightboxContainer.append(h2) // +
         }
+    }
+    
+     /** 
+     * Lightbox, close on Escape key 
+     */
+    document.addEventListener('keyup', (event) => {
+        event.preventDefault()
+        console.log(event.code); 
+        if (event.code === "Escape") {
+            closeLightbox(); 
+        }
+    }); 
+     
+    document.addEventListener('keyup', (event) => {
+        console.log(event.code); 
+        if (event.code === "ArrowLeft") {
+            lightboxPrevious();
+        }
+    }); 
+    
+    document.addEventListener('keyup', (event) => {
+        console.log(event.code); 
+        if (event.code === "ArrowRight") {
+            lightBoxNext();
+        }
+    }); 
+ 
+
+    /**
+     * lightbox, previous button 
+     */
+
+    document.querySelector('.lightbox__prev').addEventListener('click', () => {
+        lightboxPrevious();
+    });
+
+    /**
+     * lightbox, next button 
+     */     
+    document.querySelector('.lightbox__next').addEventListener('click', () => {
+        lightBoxNext();
     });
     
     /**
