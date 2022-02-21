@@ -33,6 +33,7 @@
             displayMedias(mediasToDisplay);
             displayPrice(priceToDisplay); 
             // displayLikes(likesToDisplay); 
+
         });
 }
 initPhotographerPage();
@@ -59,7 +60,15 @@ const displayPrice = (price) => {
     footer.append(divPrice); 
 }
 
-
+const displayMediaDom = (medias, mediasCards) => { // refactorisé // create DOM image OR video element
+    medias.forEach((media) => { 
+        if (media.hasOwnProperty("image")) { // return boolean true of false, if media = image...
+            mediasCards.append(createImageFactoryPage(media)) // ...create DOM image element
+        } else if (media.hasOwnProperty("video")){ // else if media = video...
+            mediasCards.append(createVideoFactoryPage(media)) // ...create DOM video element
+        }
+    }); 
+}
 
 
 /** Medias **
@@ -69,27 +78,42 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
     const mediasCards = document.querySelector(".photograph-media-cards"); // ajoute un node mediasCards 
     console.log(mediasCards);
 
-    // ordonner par défaut par likes
+    const listboxContainer = document.getElementById('listbox-container')
+    console.log(listboxContainer.value)
+    listboxContainer.addEventListener('change', () => {
+    console.log(listboxContainer.value)
+    if (listboxContainer.value == "title") {
+        medias.sort(function(a, b){
+            if(a.title < b.title) { return -1; }
+            if(a.title > b.title) { return 1; }
+            return 0;
+        });
+        console.log(medias);
+        mediasCards.innerHTML = '';
+        displayMediaDom(medias, mediasCards); // create DOM image OR video element
+    } else if (listboxContainer.value == "popularity") {
+        medias.sort(function(a, b){
+            if(a.likes > b.likes) { return -1; }
+            if(a.likes < b.likes) { return 1; }
+            return 0;
+        });
+        mediasCards.innerHTML = '';
+        displayMediaDom(medias, mediasCards); // create DOM image OR video element
+    }
+})
+    // Antoine // ordonner par défaut par likes (Popularité)
 
     /** Gallery **
     * Gallery, create card-image or card-video (DOM)
     */
-    medias.forEach((media) => { 
-        if (media.hasOwnProperty("image")) { // return boolean true of false, if media = image...
-            mediasCards.append(createImageFactoryPage(media)) // ...create DOM image element
-        } else if (media.hasOwnProperty("video")){ // else if media = video...
-            mediasCards.append(createVideoFactoryPage(media)) // ...create DOM video element
-        }
-    }); 
+    
+    displayMediaDom(medias, mediasCards); // create DOM image OR video element // Antoine, refactorisation
 
-     
+    const mediasCardsFigure = document.querySelectorAll(".photograph-media-cards > figure") // mediasCardsFigure was mediasCardsChildren
     
-    const mediasCardsChildren = document.querySelectorAll(".photograph-media-cards > figure")
-    
-    for (const [index, figure] of mediasCardsChildren.entries()) { // [index = key, figure = value]
+    for (const [index, figure] of mediasCardsFigure.entries()) { // [index = key, figure = value]
 
     //////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////// Sortir de cette fonction ?
     const mediasLikes = figure.getElementsByTagName('h2')[1].textContent; 
     // console.log(mediasLikes); // string
     let mediasLikesNumber = parseInt(mediasLikes, 10); // typeof = 10 numbers
@@ -98,7 +122,6 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
     console.log(mediasLikesTotal); // number // Fromscracth FS 2/6 4'26
     const mediasTitles = figure.getElementsByTagName('h2')[0].textContent;
     console.log(mediasTitles); // string cf. tri
-    //////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
     
         figure.querySelector('.heart').addEventListener('click', (e) => {
@@ -114,7 +137,7 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
                 removeTotalLikes()
                 updateTotalLikes()
                 console.log(mediasLikesNumber); // number
-
+        
             } else { 
                 //mediasLikesNumber -= 1 // ok console, pas dans le DOM
                 mediasLikesNumber -= 1
@@ -124,7 +147,6 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
                 removeTotalLikes()
                 updateTotalLikes()
                 console.log(mediasLikesNumber); // number
-
              }
         })
 
@@ -164,48 +186,6 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
         })
     }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-const listboxContainer = document.getElementById('listbox-container')
-console.log(listboxContainer.value)
-listboxContainer.addEventListener('change', (e) => {
-    console.log(listboxContainer.value)
-    if (listboxContainer.value == "title") {
-        medias.sort(function(a, b){
-            if(a.title < b.title) { return -1; }
-            if(a.title > b.title) { return 1; }
-            return 0;
-        });
-        console.log(medias);
-        mediasCards.innerHTML = '';
-        medias.forEach((media) => { 
-            if (media.hasOwnProperty("image")) { // return boolean true of false, if media = image...
-                mediasCards.append(createImageFactoryPage(media)) // ...create DOM image element
-            } else if (media.hasOwnProperty("video")){ // else if media = video...
-                mediasCards.append(createVideoFactoryPage(media)) // ...create DOM video element
-            }
-        }); 
-    } else if (listboxContainer.value == "popularity") {
-        medias.sort(function(a, b){
-            if(a.likes > b.likes) { return -1; }
-            if(a.likes < b.likes) { return 1; }
-            return 0;
-        });
-        mediasCards.innerHTML = '';
-        medias.forEach((media) => { 
-            if (media.hasOwnProperty("image")) { // return boolean true of false, if media = image...
-                mediasCards.append(createImageFactoryPage(media)) // ...create DOM image element
-            } else if (media.hasOwnProperty("video")){ // else if media = video...
-                mediasCards.append(createVideoFactoryPage(media)) // ...create DOM video element
-            }
-        });
-        
-    }
-})
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
     /**
      * Total likes display DOM
      */
@@ -231,9 +211,10 @@ listboxContainer.addEventListener('change', (e) => {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// const listboxContainer ... (mis au dessus )
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     const lightboxPrevious = () => {
@@ -243,7 +224,7 @@ listboxContainer.addEventListener('change', (e) => {
             currentLightboxIndex = currentLightboxIndex - 1; // ou currentLightboxIndex --
         }
     
-        const newElement = mediasCardsChildren[currentLightboxIndex]; // = div index[] //////////////// A revoir // 
+        const newElement = mediasCardsFigure[currentLightboxIndex]; // = div index[] //////////////// A revoir // 
         const newElementSrc = newElement.firstChild.src // = src URL of newElement index [] 
         const newElementTitle = newElement.getElementsByTagName('h2')[0].textContent // +
         const lightboxContainer = document.querySelector('.lightbox__container')
@@ -277,7 +258,7 @@ listboxContainer.addEventListener('change', (e) => {
             currentLightboxIndex = currentLightboxIndex + 1; // ou currentLightboxIndex ++
         }
 
-        const newElement = mediasCardsChildren[currentLightboxIndex]; 
+        const newElement = mediasCardsFigure[currentLightboxIndex]; 
         const newElementSrc = newElement.firstChild.src
         const newElementTitle = newElement.getElementsByTagName('h2')[0].textContent // +
         const lightboxContainer = document.querySelector('.lightbox__container')
@@ -352,7 +333,6 @@ listboxContainer.addEventListener('change', (e) => {
         closeLightbox(); 
     }); 
 };
-
 
 
 
