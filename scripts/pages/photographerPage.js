@@ -1,15 +1,11 @@
 /**
  * Variables 
  */
- let currentLightboxIndex = 0;
- const imgRegex = /^.*\.(jpg)$/
- const videoRegex = /^.*\.(mp4)$/
- const footer = document.querySelector(".footer"); 
-
-
-
- let mediasLikesTotal = 0; 
- console.log(mediasLikesTotal); 
+const imgRegex = /^.*\.(jpg)$/
+const videoRegex = /^.*\.(mp4)$/
+const footer = document.querySelector(".footer"); 
+let currentLightboxIndex = 0;
+let mediasLikesTotal = 0; 
 
 /**
  * Init photographer et medias datas
@@ -33,6 +29,7 @@
             displayMedias(mediasToDisplay);
             displayPrice(priceToDisplay); 
             // displayLikes(likesToDisplay); 
+            document.getElementById('photographerName').textContent = photographerToDisplay.name
 
         });
 }
@@ -60,16 +57,6 @@ const displayPrice = (price) => {
     footer.append(divPrice); 
 }
 
-const displayMediaDom = (medias, mediasCards) => { // refactorisé // create DOM image OR video element
-    medias.forEach((media) => { 
-        if (media.hasOwnProperty("image")) { // return boolean true of false, if media = image...
-            mediasCards.append(createImageFactoryPage(media)) // ...create DOM image element
-        } else if (media.hasOwnProperty("video")){ // else if media = video...
-            mediasCards.append(createVideoFactoryPage(media)) // ...create DOM video element
-        }
-    }); 
-}
-
 
 /** Medias **
 * Medias Photographer display
@@ -78,38 +65,15 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
     const mediasCards = document.querySelector(".photograph-media-cards"); // ajoute un node mediasCards 
     console.log(mediasCards);
 
-    const listboxContainer = document.getElementById('listbox-container')
-    console.log(listboxContainer.value)
-    listboxContainer.addEventListener('change', () => {
-    console.log(listboxContainer.value)
-    if (listboxContainer.value == "title") {
-        medias.sort(function(a, b){
-            if(a.title < b.title) { return -1; }
-            if(a.title > b.title) { return 1; }
-            return 0;
-        });
-        console.log(medias);
-        mediasCards.innerHTML = '';
-        displayMediaDom(medias, mediasCards); // create DOM image OR video element
-    } else if (listboxContainer.value == "popularity") {
-        medias.sort(function(a, b){
-            if(a.likes > b.likes) { return -1; }
-            if(a.likes < b.likes) { return 1; }
-            return 0;
-        });
-        mediasCards.innerHTML = '';
-        displayMediaDom(medias, mediasCards); // create DOM image OR video element
-    }
-})
-    // Antoine // ordonner par défaut par likes (Popularité)
-
-    /** Gallery **
-    * Gallery, create card-image or card-video (DOM)
-    */
-    
-    displayMediaDom(medias, mediasCards); // create DOM image OR video element // Antoine, refactorisation
-
-    const mediasCardsFigure = document.querySelectorAll(".photograph-media-cards > figure") // mediasCardsFigure was mediasCardsChildren
+    const displayMediaDom = (medias) => { // refactorisé // create DOM image OR video element
+        medias.forEach((media) => { 
+            if (media.hasOwnProperty("image")) { // return boolean true of false, if media = image...
+                mediasCards.append(createImageFactoryPage(media)) // ...create DOM image element
+            } else if (media.hasOwnProperty("video")){ // else if media = video...
+                mediasCards.append(createVideoFactoryPage(media)) // ...create DOM video element
+            }
+        }); 
+        const mediasCardsFigure = document.querySelectorAll(".photograph-media-cards > figure") // mediasCardsFigure was mediasCardsChildren
     
     for (const [index, figure] of mediasCardsFigure.entries()) { // [index = key, figure = value]
 
@@ -195,7 +159,7 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
         const mediasLikesTotalCardDOM = `<h2 id="likes">${mediasLikesTotal}</h2>
                                         <div class="heart filter_icons"><i class="fa fa-heart fa-lg"></i></div>`;
         divLikes.innerHTML = mediasLikesTotalCardDOM; 
-        footer.append(divLikes); 
+        footer.prepend(divLikes); 
     }
     displayTotalLikes(); // En dehors de la boucle, pour afficher le dernier résultat 
 
@@ -208,14 +172,6 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
     const updateTotalLikes = () => {
         document.getElementById('likes').textContent = mediasLikesTotal
     }
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     const lightboxPrevious = () => {
         if (currentLightboxIndex === 0) { // lorsque index[0] (et que click previous)... 
@@ -309,29 +265,64 @@ const displayMedias = (medias) => { // displayMedia reçoit ce qu'initPhotograph
             lightBoxNext();
         }
     }); 
- 
 
     /**
-     * lightbox, previous button 
+     * lightbox, previous, next, close buttons 
      */
-
     document.querySelector('.lightbox__prev').addEventListener('click', () => {
         lightboxPrevious();
-    });
-
-    /**
-     * lightbox, next button 
-     */     
+    }); 
     document.querySelector('.lightbox__next').addEventListener('click', () => {
         lightBoxNext();
     });
-    
-    /**
-     * Lighbox, close button
-     */
     document.querySelector('.lightbox__close').addEventListener('click', () => { 
         closeLightbox(); 
     }); 
+    }
+
+    /** Gallery **
+    * Sort by name or popularity
+    */
+    displayMediaDom(medias, mediasCards); // create DOM image OR video element // Antoine, refactorisation
+
+    const listboxContainer = document.getElementById('listbox-container')
+    console.log(listboxContainer.value)
+    window.addEventListener('load', () => {
+        medias.sort(function(a, b){
+            if(a.likes > b.likes) { return -1; }
+            if(a.likes < b.likes) { return 1; }
+            return 0;
+        });
+        mediasCards.innerHTML = '';
+        mediasLikesTotal = 0
+        document.querySelector(".total_likes").remove()
+        displayMediaDom(medias, mediasCards);
+    })
+    listboxContainer.addEventListener('change', () => {
+    console.log(listboxContainer.value)
+        if (listboxContainer.value == "title") {
+            medias.sort(function(a, b){
+                if(a.title < b.title) { return -1; }
+                if(a.title > b.title) { return 1; }
+                return 0;
+            });
+            console.log(medias);
+            mediasCards.innerHTML = '';
+            mediasLikesTotal = 0
+            displayMediaDom(medias, mediasCards); // create DOM image OR video element
+            document.querySelector(".total_likes").remove()
+        } else if (listboxContainer.value == "popularity") {
+            medias.sort(function(a, b){
+                if(a.likes > b.likes) { return -1; }
+                if(a.likes < b.likes) { return 1; }
+                return 0;
+            });
+            mediasCards.innerHTML = '';
+            mediasLikesTotal = 0
+            document.querySelector(".total_likes").remove()
+            displayMediaDom(medias, mediasCards); // create DOM image OR video element
+        }
+    })
 };
 
 
