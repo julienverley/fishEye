@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <!--Fontawesome-->
@@ -10,91 +10,89 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/contact.css" rel="stylesheet" type="text/css" />
+    <link href="css/dropdown.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="css/lightbox.css">
   
     <title>Fisheye - photographe </title>
   </head>
   <body>
    
+    <!-- HEADER -->
     <header role="banner">
       <a href="./index.html">
-        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page logo"/>
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye logo"/>
       </a>
     </header>
    
-    <main id="main" class="main">
-
-      <!--Photographer header-->
-      <section class="photograph-header" role="region" aria-label="photographer information">
+    <!-- MAIN -->
+    <main id="main" class="main" aria-hidden="false">
+      
+      
+      <!-- SECTION Photographer header -->
+      <section class="photograph-header" role="region" aria-label="photographer profile">
       </section>
 
-      <!--Button sort popularité/date/titre-->
-      <div class="select-box" role="listbox"></div>
-      <div id="sort">
-        <label id="listbox-label" for="listbox-container">Trier par
-          <select id="listbox-container" role="button"><!--ajouter aria--> 
-            <option class="listbox-option" role="option" data-sort="popularity" id="listbox-popularity" value="popularity">Popularité</option>
-            <option class="listbox-option" role="option" data-sort="title" id="listbox-title" value="title">Titre</option>
 
-            <!-- <span id="listbox-current-option">Popularité</span> -->
-            <!-- <div role="listbox" id="listbox" tabindex="-1"> --><!--ajouter tabindex et aria--> 
-              <!-- <div class="listbox-option" role="option" data-sort="popularity" id="listbox-popularity">Popularité</div> --><!--ajouter tabindex--> 
-              <!-- <div class="listbox-option" role="option" data-sort="title" id="listbox-title">Titre</div> --><!--ajouter tabindex--> 
-            <!-- </div> -->
-          </select>
-        </label> 
+      <!--Dropdown menu-->
+      <label for=""selection aria-label="Sort by menu">Trier par <!-- id="listbox-container" -->
+      <div class="dropdown"><!--ajouter aria--> 
+        <button tabindex="0" onclick="showDropdown()" class="dropbtn" aria-haspopup="true" aria-expanded="false">Popularité</button>
+        <div id="dropdownContainer" class="dropdown-content">
+          <span tabindex="1" class="listbox-option" role="option" data-sort="popularity" id="listbox-popularity" value="popularity">Popularité</span><!--tabindex ; button-->
+          <span tabindex="1" class="listbox-option" role="option" data-sort="title" id="listbox-title" value="title">Titre</span><!--tabindex ; button ?--> 
+        </div>
       </div>
+    </label> 
 
-      <!--Photographer medias-->
-      <section class="photograph-media-cards" role="region" aria-label="medias catalog">
+
+      <!-- SECTION Photographer medias-->
+      <section class="photograph-media-cards" role="region" aria-label="photographer medias catalog">
       </section>
       
-      <!--Photographer likes & price-->
-      <footer class="footer" role="contentinfo">
-       <!--  <div class="total_likes"></div>
-        <div class="price"></div> -->
-      </footer>
-
     </main>
 
+      <!--Photographer likes & price-->
+      <footer class="footer" role="Content information" aria-label="total medias likes and price a day">
+      </footer>
+
+    
 
 
     <!--Lightbox modal-->
-    <div id="lightbox"><!--onclick="displayLightbox()"-->
+    <div id="lightbox" role="dialog" aria-hidden="true"><!--onclick="displayLightbox()"-->
       <button class="lightbox-button lightbox__next">Suivant</button>
       <button class="lightbox-button lightbox__prev">Précédent</button>
       <button class="lightbox-button lightbox__close" onclick="closeLightbox()">Fermer</button><!--onclick="closeLightbox()"-->
       <div class="lightbox__container">
         <div class="lightbox-media-title"></div>
       </div>
-      
-  </div>
-
+    </div>
 
 
     <!--Contact form modal-->
-    <div id="contact_modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div id="contact_modal" role="dialog" aria-hidden="true" aria-modal="true" aria-describedby="contact modal">
 			<div class="modal">
 				<header>
-          <h2>Contactez-moi</h2>
-          <!-- ! Ajouter le nom du photographe en JS ! -->
-          <span id="photographerName"></span>
-          <div>
-            <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <div class="contact_header_top">
+            <h2>Contactez-moi</h2>
+            <button class="modal__close">
+              <img src="assets/icons/close.svg" onclick="closeModal()" alt="close button" />
+            </button>
           </div>
+          <h2 id="photographerNameContact"></h2>
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-            <label>Nom</label>
-						<input />
+				<form method="post" action="" role="form" aria-label="photographer contact form">
+					<fieldset role="group"> <!--aria-labelledby="contact information" <Fieldset> à la place de <div> -->
+						<label for="firstname">Prénom</label>
+						<input type="text" name="firstname" id="firstname" />
+            <label for="lastname">Nom</label>
+						<input type="text" name="lastname" id="lastname" />
             <label for="email">Email</label>
-						<input />
-            <label>Votre message</label>
-            <textarea></textarea>
-					</div>
-          <button class="contact-button">Envoyer</button>
+						<input type="email" name="email" id="email" />
+            <label for="message">Votre message</label>
+            <textarea id="message"></textarea>
+          </fieldset>
+          <button type="submit" class="contact-button">Envoyer</button>
 				</form>
 			</div>
 		</div>
@@ -116,6 +114,7 @@
     <!--Utils-->
     <!-- <script src="/scripts/utils/lightbox-grafikart.js" type="module"></script> -->
     <script src="/scripts/utils/urlId.js"></script>
+    <script src="/scripts/utils/dropdown.js"></script>
     <script src="/scripts/utils/lightbox.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
 

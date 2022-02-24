@@ -10,6 +10,7 @@ const photographerFactoryPage = (photographerObject) => { // function attend un 
         const div = document.createElement('div'); 
         const img = document.createElement('img');
         img.setAttribute("src", picture)
+        img.setAttribute("alt", name + " photographer portrait")
         const h1 = document.createElement('h1');
         h1.textContent = name; 
         const h2 = document.createElement('h2'); 
@@ -24,7 +25,6 @@ const photographerFactoryPage = (photographerObject) => { // function attend un 
         div.appendChild(h3); 
         article.appendChild(span); 
         article.appendChild(img);
-
         return article
     }
     
@@ -42,6 +42,7 @@ const createImageFactoryPage = (mediaObject) => { // cf. Fromscratch 3/6 2'02
     
     const figure = document.createElement('figure'); // 
     figure.classList.add('card') // .lightbox-element remplacé par .card
+    figure.setAttribute('tabindex', '2') //////////////////////////////// tabulation OK, comment cliquer ?
 
     const createImageFactoryPageDOM = // Gabarit, template literals // figure figcaption
     `<img src="./assets/photographersMedias/${photographerId}/${image}" alt="${title}"></img>
@@ -49,7 +50,7 @@ const createImageFactoryPage = (mediaObject) => { // cf. Fromscratch 3/6 2'02
             <h2>${title}</h2>
             <div>
                 <h2 class="likes">${likes}</h2>
-                <div class="heart filter_icons"><i class="fa fa-heart fa-lg"></i></div>
+                <div class="heart filter_icons"><i class="fa fa-heart fa-lg" title="heart icon"></i></div>
             </div>
         </div>`; 
     
@@ -63,6 +64,7 @@ const createVideoFactoryPage = (mediaObject) => {
 
     const figure = document.createElement('figure'); 
     figure.classList.add("card"); 
+    figure.setAttribute('tabindex', '2') //////////////////////////////// tabulation OK, comment cliquer ?
 
     const createVideoFactoryPageDOM = 
     `<video class="video" src="./assets/photographersMedias/${photographerId}/${video}" alt="${title}"></video>
@@ -70,7 +72,7 @@ const createVideoFactoryPage = (mediaObject) => {
             <h2>${title}</h2>
             <div>
                 <h2 class="likes">${likes}</h2>
-                <div class="heart filter_icons heart"><i class="fa fa-heart fa-lg"></i></div>
+                <div class="heart filter_icons heart"><i class="fa fa-heart fa-lg" title="heart icon"></i></div>
             </div>
         </div>`;   
 

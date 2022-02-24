@@ -1,0 +1,134 @@
+/* Listbox */
+
+/* .dropdown {
+    margin-top: 5px;
+    height: 80px;
+    padding: 0 0 0 20px;
+  }
+*/
+  
+  #listbox-label {
+    display: flex;
+    position: relative;
+    min-width: 70px;
+    /* height: 23px; */
+    top: 0px;
+    /* line-height: 23px; */
+    font-weight: 600;
+    font-size: 18px;
+    /* justify-content: space-between; */
+    margin: 0 0 30px 0;
+  } 
+  
+  .dropbtn {
+    background-color: #901C1C;
+    color: white;
+    border-radius: 3px;
+    /* padding: 16px; */
+    width: 170px;
+    height: 69px; 
+    font-size: 18px;
+    padding: 12px 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #901C1C;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 100px;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 0; 
+    background-color: #f1f1f1;
+    min-width: 170px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    /* margin-left: 100px; */
+  }
+  
+  .dropdown-content .listbox-option {
+    border-radius: 3px;
+    /* left: 70px;  */
+    color: white;
+    background-color: #901C1C;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+  }
+  
+  .dropdown a:hover {background-color: #901C1C;}
+  
+  .show {display: block;}
+
+  
+
+
+/* /////////////////////////////////////////////// */
+/* 
+  #dropdown-select {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    z-index: 0;
+    background-color: #901C1C;
+    border-color: transparent;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    min-height: 50px;
+    font-weight: 500;
+    width: 170px;
+    left: 80px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  }
+  #listbox-container::after {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    font-weight: 900;
+  }
+  #listbox-container:hover {
+    color: black;
+    background-color:#D3573C;
+  }
+  #listbox-container:hover > #listbox-current-option {
+    color: black;
+    background-color:#D3573C;
+  }
+  #listbox-container:focus {
+    outline: 2px solid #D3573C;
+  }
+
+  #listbox-current-option {
+      margin-left: 10px;
+  }
+
+  #listbox {
+    display: none;
+  }
+
+  .listbox-option {
+    padding: 10px 1ch 10px 0;
+    border-right: 1px solid white;
+  }
+  .listbox-option:focus {
+    outline: none;
+    background-color: #D3573C;
+    color: black;
+  }
+  */

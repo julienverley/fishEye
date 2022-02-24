@@ -6,8 +6,10 @@ function photographerFactory(data) {
         // remplacer par const photographerCard = `(html) <a href...` ?
         const article = document.createElement( 'article' );
         article.setAttribute('id', id) // id des photographes sur articles 
+        article.setAttribute('tabindex', '0') //////////////////////////////// tabulation OK, comment cliquer ?
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)
+        img.setAttribute("alt", name + " photographer portrait")
         const h2 = document.createElement( 'h2' );
         h2.textContent = name; 
         const h4 = document.createElement( 'h4' ); 
