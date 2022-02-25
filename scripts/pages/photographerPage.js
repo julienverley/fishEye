@@ -16,7 +16,7 @@ const initPhotographerPage = () => {
   /*
      Get photographer and medias datas
      */
-  fetch('./data/photographers.json') // récupère le .json
+  fetch('../../data/photographers.json') // récupère le .json
     .then((response) => response.json()) // transformation en .json exploitable par JS
     .then((data) => {
       // données à exploiter, on les utilise :
@@ -245,7 +245,6 @@ const displayMedias = (medias) => {
     }
     return 0;
   });
-  // mediasCards.innerHTML = '';
   removeAllChildNodes(mediasCards);
 
   mediasLikesTotal = 0;
@@ -253,7 +252,10 @@ const displayMedias = (medias) => {
   displayMediaDom(medias); // lightbox index modifié
 
   dropdownContainer.addEventListener('click', (e) => {
-    if (e.target.id == 'listbox-title') {
+    if (e.target.textContent == 'Titre') {
+      document.querySelector('.dropbtn-text').textContent = "Titre"
+      document.querySelector('.listbox-option-text1').textContent = "Titre"
+      document.querySelector('.listbox-option-text2').textContent = "Popularité"
       medias.sort((a, b) => {
         if (a.title < b.title) {
           return -1;
@@ -263,12 +265,15 @@ const displayMedias = (medias) => {
         }
         return 0;
       });
-      // mediasCards.innerHTML = '';
       removeAllChildNodes(mediasCards);
       mediasLikesTotal = 0;
       displayMediaDom(medias); // lightbox index modifié
       document.querySelector('.total_likes').remove();
-    } else if (e.target.id == 'listbox-popularity') {
+    } else if (e.target.textContent == 'Popularité') {
+      document.querySelector('.dropbtn-text').textContent = "Popularité"
+      document.querySelector('.listbox-option-text1').textContent = "Popularité"
+      document.querySelector('.listbox-option-text2').textContent = "Titre"
+
       medias.sort((a, b) => {
         if (a.likes > b.likes) {
           return -1;
@@ -278,7 +283,6 @@ const displayMedias = (medias) => {
         }
         return 0;
       });
-      // mediasCards.innerHTML = '';
       removeAllChildNodes(mediasCards);
       mediasLikesTotal = 0;
       document.querySelector('.total_likes').remove();
@@ -287,13 +291,16 @@ const displayMedias = (medias) => {
   });
 };
 
+/** Lightbox
+* Navigation next
+*/
 const lightBoxNext = (medias) => {
   console.log(currentLightboxIndex);
   if (currentLightboxIndex === medias.length - 1) {
     // lorsque index[0] (et que click previous)...
     currentLightboxIndex = medias.length - medias.length; // ... index[last]
   } else {
-    currentLightboxIndex += 1; // ou currentLightboxIndex ++
+    currentLightboxIndex += 1; 
   }
 
   /// ///////////////////// Refactoriser ////////////////////////
@@ -302,38 +309,38 @@ const lightBoxNext = (medias) => {
   );
   const newElement = mediasCardsFigure[currentLightboxIndex];
   const newElementSrc = newElement.firstChild.src;
-  const newElementTitle = newElement.getElementsByTagName('h2')[0].textContent; // +
+  const newElementTitle = newElement.getElementsByTagName('h2')[0].textContent; 
   const lightboxContainer = document.querySelector('.lightbox__container');
   lightboxContainer.innerHTML = '';
 
   if (newElementSrc.match(imgRegex)) {
-    const img = document.createElement('img'); // image
+    const img = document.createElement('img'); 
     img.src = newElementSrc;
     lightboxContainer.append(img);
-    const h2 = document.createElement('h2'); // image title ..
-    h2.innerHTML = newElementTitle; // +
-    lightboxContainer.append(h2); // +
+    const h2 = document.createElement('h2'); 
+    h2.innerHTML = newElementTitle; 
+    lightboxContainer.append(h2); 
   } else if (newElementSrc.match(videoRegex)) {
-    const video = document.createElement('video'); // video
+    const video = document.createElement('video'); 
     video.src = newElementSrc;
     video.controls = true;
     lightboxContainer.append(video);
-    const h2 = document.createElement('h2'); // video title ..
-    h2.innerHTML = newElementTitle; // +
-    lightboxContainer.append(h2); // +
+    const h2 = document.createElement('h2');
+    h2.innerHTML = newElementTitle; 
+    lightboxContainer.append(h2); 
   }
 };
 
 /** Lightbox
-     * Close, left and right with keys
-     */
+* Navigation previous
+*/
 const lightboxPrevious = (medias) => {
   console.log(currentLightboxIndex);
   if (currentLightboxIndex === 0) {
     // lorsque index[0] (et que click previous)...
     currentLightboxIndex = medias.length - 1; // ... index[last]
   } else {
-    currentLightboxIndex -= 1; // ou currentLightboxIndex -- ////////////////////////
+    currentLightboxIndex -= 1; 
   }
 
   /// ///////////////////// Refactoriser ////////////////////////
@@ -344,24 +351,24 @@ const lightboxPrevious = (medias) => {
   const newElement = mediasCardsFigure[currentLightboxIndex];
   // = div index[] //////////////// A revoir //
   const newElementSrc = newElement.firstChild.src; // = src URL of newElement index []
-  const newElementTitle = newElement.getElementsByTagName('h2')[0].textContent; // +
+  const newElementTitle = newElement.getElementsByTagName('h2')[0].textContent; 
   const lightboxContainer = document.querySelector('.lightbox__container');
   lightboxContainer.innerHTML = ''; // empty existing contains
 
   if (newElementSrc.match(imgRegex)) {
-    const img = document.createElement('img'); // image ..
+    const img = document.createElement('img'); 
     img.src = newElementSrc;
     lightboxContainer.append(img);
-    const h2 = document.createElement('h2'); // image title ..
-    h2.innerHTML = newElementTitle; // +
-    lightboxContainer.append(h2); // +
+    const h2 = document.createElement('h2'); 
+    h2.innerHTML = newElementTitle; 
+    lightboxContainer.append(h2); 
   } else if (newElementSrc.match(videoRegex)) {
-    const video = document.createElement('video'); // video ...
+    const video = document.createElement('video'); 
     video.src = newElementSrc;
     video.controls = true;
     lightboxContainer.append(video);
-    const h2 = document.createElement('h2'); // video title ..
-    h2.innerHTML = newElementTitle; // +
-    lightboxContainer.append(h2); // +
+    const h2 = document.createElement('h2'); 
+    h2.innerHTML = newElementTitle; 
+    lightboxContainer.append(h2); 
   }
 };

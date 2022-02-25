@@ -101,6 +101,8 @@ object-fit: cover;
 }
 
 .photograph-media-cards figure div {
+    margin-top: 2px;
+    margin-bottom: 2px;
     display: flex;
     align-items: center;
     justify-content: space-between;

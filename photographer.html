@@ -33,13 +33,26 @@
       </section>
 
 
-      <!--Dropdown menu-->
+      <!-- Dropdown menu -->
       <label for=""selection aria-label="Sort by menu">Trier par <!-- id="listbox-container" -->
       <div class="dropdown"><!--ajouter aria--> 
-        <button tabindex="0" onclick="showDropdown()" class="dropbtn" aria-haspopup="true" aria-expanded="false" role="select">Popularité</button> <!-- innertText en JS -->
-        <div id="dropdownContainer" class="dropdown-content">
-          <span tabindex="1" class="listbox-option" role="option" data-sort="popularity" id="listbox-popularity" value="popularity">Popularité</span><!--tabindex ; button 1er celui sélectionné-->
-          <span tabindex="1" class="listbox-option" role="option" data-sort="title" id="listbox-title" value="title">Titre</span><!--tabindex ; button ? 2ème à sélectionner--> 
+        <button tabindex="0" class="dropbtn" aria-haspopup="true" aria-expanded="false" role="select">
+          <div class="dropbtn-text">Popularité</div> 
+        </button> <!-- innertText en JS -->
+        
+        <div id='dropdownArrow' class="dropdown-arrow"><i class="fa fa-solid fa-chevron-down" onclick="showDropdown()"></i></div>
+        <!--<div class="svg-arrow"></div>-->      
+        
+        <div id="dropdownContainer" class="dropdown-content"><!-- .show ou pas -->
+
+          <span tabindex="1" class="listbox-option option1 white-border" role="option" data-sort="popularity" value="popularity">
+            <div id="listbox-popularity" class="listbox-option-text1">Popularité</div>  
+            <div class="dropdown-arrow"><i class="fa fa-solid fa-chevron-up"></i></div>          </span><!--tabindex ; button 1er celui sélectionné-->
+
+          <span tabindex="1" class="listbox-option option2" role="option" data-sort="title"  value="title">
+            <div id="listbox-title" class="listbox-option-text2">Titre</div>  
+          </span><!--tabindex ; button ? 2ème à sélectionner--> 
+
         </div>
       </div>
     </label> 
@@ -117,6 +130,5 @@
     <script src="/scripts/utils/dropdown.js"></script>
     <script src="/scripts/utils/lightbox.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
-
   </body>
 </html>

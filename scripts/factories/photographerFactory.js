@@ -4,7 +4,7 @@
 const photographerFactoryPage = (photographerObject) => {
 // function attend un objet à traiter ; assigne les keys values aux 7 variables name, id etc.
   const {
-    name, id, portrait, city, country, tagline, price,
+    name, portrait, city, country, tagline,
   } = photographerObject; // ou const name = dataPage.name etc. pour chaque key
   const picture = `assets/photographersID/${portrait}`;
 
@@ -41,7 +41,7 @@ const photographerFactoryPage = (photographerObject) => {
  */
 const createImageFactoryPage = (mediaObject) => { // cf. Fromscratch 3/6 2'02
   const {
-    id, photographerId, title, image, likes, date, price,
+    photographerId, title, image, likes,
   } = mediaObject;
   // const images = `assets/photographersMedias/${photographerId}/${image}`;
 
@@ -65,7 +65,7 @@ const createImageFactoryPage = (mediaObject) => { // cf. Fromscratch 3/6 2'02
 
 const createVideoFactoryPage = (mediaObject) => {
   const {
-    id, photographerId, title, video, likes, date, price,
+    photographerId, title, video, likes,
   } = mediaObject;
   // const videos = `assets/photographersMedias/${photographerId}/${video}`;
 
@@ -78,7 +78,7 @@ const createVideoFactoryPage = (mediaObject) => {
             <h2>${title}</h2>
             <div>
                 <h2 class="likes">${likes}</h2>
-                <div class="heart filter_icons heart"><i class="fa fa-heart fa-lg" title="heart icon"></i></div>
+                <div class="heart filter_icons"><i class="fa fa-heart fa-lg" title="heart icon"></i></div>
             </div>
         </div>`;
 
