@@ -36,10 +36,10 @@
       <!--Dropdown menu-->
       <label for=""selection aria-label="Sort by menu">Trier par <!-- id="listbox-container" -->
       <div class="dropdown"><!--ajouter aria--> 
-        <button tabindex="0" onclick="showDropdown()" class="dropbtn" aria-haspopup="true" aria-expanded="false">Popularité</button>
+        <button tabindex="0" onclick="showDropdown()" class="dropbtn" aria-haspopup="true" aria-expanded="false" role="select">Popularité</button> <!-- innertText en JS -->
         <div id="dropdownContainer" class="dropdown-content">
-          <span tabindex="1" class="listbox-option" role="option" data-sort="popularity" id="listbox-popularity" value="popularity">Popularité</span><!--tabindex ; button-->
-          <span tabindex="1" class="listbox-option" role="option" data-sort="title" id="listbox-title" value="title">Titre</span><!--tabindex ; button ?--> 
+          <span tabindex="1" class="listbox-option" role="option" data-sort="popularity" id="listbox-popularity" value="popularity">Popularité</span><!--tabindex ; button 1er celui sélectionné-->
+          <span tabindex="1" class="listbox-option" role="option" data-sort="title" id="listbox-title" value="title">Titre</span><!--tabindex ; button ? 2ème à sélectionner--> 
         </div>
       </div>
     </label> 
