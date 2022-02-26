@@ -1,11 +1,20 @@
+const dropdownArrow = document.getElementById('dropdownArrow'); 
+
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function showDropdown() {
   document.getElementById('dropdownContainer').classList.toggle('show'); 
 }
 
+// Open dropdown with keyboard
+dropdownArrow.addEventListener('keyup', (event) => {
+  event.preventDefault();
+  if (event.code === 'Enter') {
+    showDropdown();
+  }
+});
 
-// Close the dropdown if the user clicks outside of it
+// Close dropdown if user clicks outside of it
 window.onclick = function (event) {
   if (!event.target.matches('.fa-chevron-down')) {
     const dropdowns = document.getElementsByClassName('dropdown-content'); // const dropdowns = document.getElementsByClassName('dropdown-content');
@@ -18,5 +27,3 @@ window.onclick = function (event) {
     }
   }
 }; 
-/* const dropdownArrow = document.getElementById('dropdownArrow')
-dropdownArrow.addEventListener('click', showDropdown) */

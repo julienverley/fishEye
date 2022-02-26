@@ -20,7 +20,6 @@ const initPhotographerPage = () => {
     .then((response) => response.json()) // transformation en .json exploitable par JS
     .then((data) => {
       // données à exploiter, on les utilise :
-      console.log('FETCH');
       const searchParams = new URLSearchParams(window.location.search);
       const photographerId = searchParams.get('id');
       const photographerToDisplay = data.photographers.find(
@@ -122,7 +121,6 @@ const displayMedias = (medias) => {
          * Click on mediasCardsFigure to display
          */
       figure.firstChild.addEventListener('click', () => {
-        console.log(index);
         const sourceMediaClicked = figure.firstChild.src;
         const titleMediaClicked = figure.getElementsByTagName('h2')[0].textContent;
         if (sourceMediaClicked.match(imgRegex)) {
@@ -189,11 +187,9 @@ const displayMedias = (medias) => {
       }
       if (event.code === 'ArrowLeft') {
         lightboxPrevious(medias);
-        console.log('Bougé avec le clavier gauche');
       }
       if (event.code === 'ArrowRight') {
         lightBoxNext(medias);
-        console.log('Bougé avec le clavier droite');
       }
     });
 
@@ -206,7 +202,6 @@ const displayMedias = (medias) => {
         event.stopImmediatePropagation();
         event.preventDefault();
         lightboxPrevious(medias);
-        console.log('Bougé au click gauche');
       });
     document
       .querySelector('.lightbox__next')
@@ -214,7 +209,6 @@ const displayMedias = (medias) => {
         event.stopImmediatePropagation();
         event.preventDefault();
         lightBoxNext(medias);
-        console.log('Bougé au click droit');
       });
     document
       .querySelector('.lightbox__close')
@@ -234,7 +228,7 @@ const displayMedias = (medias) => {
   /** Medias gallery
    * Sort by name or popularity
    */
-  displayMediaDom(medias); // Antoine
+  displayMediaDom(medias); // Ajouté par Antoine
   const dropdownContainer = document.getElementById('dropdownContainer');
   medias.sort((a, b) => {
     if (a.likes > b.likes) {
@@ -251,51 +245,114 @@ const displayMedias = (medias) => {
   document.querySelector('.total_likes').remove();
   displayMediaDom(medias); // lightbox index modifié
 
+  // Sort by title function 
+  const sortByTitle = () => {
+    /* const element = document.querySelector('.option2') ////////////////////////////
+    element.classList.add("clickPopularity"); //////////////////////////////////////////////////////// */
+
+    document.querySelector('.dropbtn-text').textContent = "Titre"
+  
+    document.querySelector('.option1').setAttribute('data-sort', 'title')
+    document.querySelector('.option1').setAttribute('value', 'title')
+    document.querySelector('.listbox-option-text1').textContent = "Titre"
+
+    document.querySelector('.option2').setAttribute('data-sort', 'popularity')
+    document.querySelector('.option2').setAttribute('value', 'popularity')
+    document.querySelector('.listbox-option-text2').textContent = "Popularité"
+
+    medias.sort((a, b) => {
+      if (a.title < b.title) {
+        return -1;
+      }
+      if (a.title > b.title) {
+        return 1;
+      }
+      return 0;
+    });
+    removeAllChildNodes(mediasCards);
+    mediasLikesTotal = 0;
+    displayMediaDom(medias); // lightbox index modifié
+    document.querySelector('.total_likes').remove();
+  }
+  
+  // Sort by popularity function 
+  const sortByPopularity = () => {
+    document.querySelector('.dropbtn-text').textContent = "Popularité"
+
+    document.querySelector('.option1').setAttribute('data-sort', 'popularity')
+    document.querySelector('.option1').setAttribute('value', 'popularity')
+    document.querySelector('.listbox-option-text1').textContent = "Popularité"
+    
+    document.querySelector('.option2').setAttribute('data-sort', 'title')
+    document.querySelector('.option2').setAttribute('value', 'title')
+    document.querySelector('.listbox-option-text2').textContent = "Titre"
+
+    medias.sort((a, b) => {
+      if (a.likes > b.likes) {
+        return -1;
+      }
+      if (a.likes < b.likes) {
+        return 1;
+      }
+      return 0;
+    });
+    removeAllChildNodes(mediasCards);
+    mediasLikesTotal = 0;
+    document.querySelector('.total_likes').remove();
+    displayMediaDom(medias); // lightbox index modifié
+  }
+
+// Sort by popularity with keyboard
+const option2 = document.querySelector('.option2'); 
+option2.addEventListener('keyup', (event) => {
+  event.preventDefault();
+  if (event.code === 'Enter') {
+    optionText = event.target.textContent.trim() // enlever les espaces avant et après 
+    if (optionText === "Popularité") {
+      sortByPopularity()
+    } else if (optionText === "Titre"){
+      sortByTitle()
+    }
+    //sortByTitle();
+  }
+});
+
+  // Click on dropdown and sort  
   dropdownContainer.addEventListener('click', (e) => {
     if (e.target.textContent == 'Titre') {
-      document.querySelector('.dropbtn-text').textContent = "Titre"
-      document.querySelector('.listbox-option-text1').textContent = "Titre"
-      document.querySelector('.listbox-option-text2').textContent = "Popularité"
-      medias.sort((a, b) => {
-        if (a.title < b.title) {
-          return -1;
-        }
-        if (a.title > b.title) {
-          return 1;
-        }
-        return 0;
-      });
-      removeAllChildNodes(mediasCards);
-      mediasLikesTotal = 0;
-      displayMediaDom(medias); // lightbox index modifié
-      document.querySelector('.total_likes').remove();
+      sortByTitle(); 
     } else if (e.target.textContent == 'Popularité') {
-      document.querySelector('.dropbtn-text').textContent = "Popularité"
-      document.querySelector('.listbox-option-text1').textContent = "Popularité"
-      document.querySelector('.listbox-option-text2').textContent = "Titre"
-
-      medias.sort((a, b) => {
-        if (a.likes > b.likes) {
-          return -1;
-        }
-        if (a.likes < b.likes) {
-          return 1;
-        }
-        return 0;
-      });
-      removeAllChildNodes(mediasCards);
-      mediasLikesTotal = 0;
-      document.querySelector('.total_likes').remove();
-      displayMediaDom(medias); // lightbox index modifié
+      sortByPopularity(); 
     }
   });
+
+// Open lightbox with keyboard on figure
+// const option2 = document.querySelector('.option2'); 
+figure.firstChild.addEventListener('keyup', (event) => {
+  event.preventDefault();
+  if (event.code === 'Enter') {
+    displayLightbox()
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+  
+  
 };
 
 /** Lightbox
 * Navigation next
 */
 const lightBoxNext = (medias) => {
-  console.log(currentLightboxIndex);
   if (currentLightboxIndex === medias.length - 1) {
     // lorsque index[0] (et que click previous)...
     currentLightboxIndex = medias.length - medias.length; // ... index[last]
@@ -335,7 +392,6 @@ const lightBoxNext = (medias) => {
 * Navigation previous
 */
 const lightboxPrevious = (medias) => {
-  console.log(currentLightboxIndex);
   if (currentLightboxIndex === 0) {
     // lorsque index[0] (et que click previous)...
     currentLightboxIndex = medias.length - 1; // ... index[last]

@@ -5,12 +5,10 @@ function photographerFactory(data) {
   const picture = `assets/photographersID/${portrait}`;
 
   function getPhotographerCardDOM() {
-    // remplacer par const photographerCard = `(html) <a href...` ?
     const article = document.createElement('article');
     const a = document.createElement('a');
     a.setAttribute('href', `./photographer.html?id=${id}`);
     article.setAttribute('id', id); // id des photographes sur articles
-    article.setAttribute('tabindex', '0'); /// ///////////////////////////// tabulation OK, comment cliquer ?
     const img = document.createElement('img');
     img.setAttribute('src', picture);
     img.setAttribute('alt', `${name} photographer portrait`);

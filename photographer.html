@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8">
     <!--Fontawesome-->
@@ -19,7 +19,7 @@
    
     <!-- HEADER -->
     <header role="banner">
-      <a href="./index.html">
+      <a href="./index.html" tabindex="5">
         <img src="assets/images/logo.png" class="logo" alt="Fisheye logo"/>
       </a>
     </header>
@@ -34,23 +34,24 @@
 
 
       <!-- Dropdown menu -->
-      <label for=""selection aria-label="Sort by menu">Trier par <!-- id="listbox-container" -->
+      <label tabindex="5" for=""selection aria-label="Sort by menu">Trier par <!-- id="listbox-container" -->
       <div class="dropdown"><!--ajouter aria--> 
-        <button tabindex="0" class="dropbtn" aria-haspopup="true" aria-expanded="false" role="select">
+        <button tabindex="-1" class="dropbtn" aria-haspopup="true" aria-expanded="false" role="select">
           <div class="dropbtn-text">Popularité</div> 
         </button> <!-- innertText en JS -->
         
-        <div id='dropdownArrow' class="dropdown-arrow"><i class="fa fa-solid fa-chevron-down" onclick="showDropdown()"></i></div>
+        <div tabindex="5" id='dropdownArrow' class="dropdown-arrow"><i class="fa fa-solid fa-chevron-down" onclick="showDropdown()"></i></div>
         <!--<div class="svg-arrow"></div>-->      
         
         <div id="dropdownContainer" class="dropdown-content"><!-- .show ou pas -->
 
-          <span tabindex="1" class="listbox-option option1 white-border" role="option" data-sort="popularity" value="popularity">
-            <div id="listbox-popularity" class="listbox-option-text1">Popularité</div>  
-            <div class="dropdown-arrow"><i class="fa fa-solid fa-chevron-up"></i></div>          </span><!--tabindex ; button 1er celui sélectionné-->
+          <span tabindex="5" class="listbox-option option1 white-border" role="button" data-sort="popularity" value="popularity">
+            <div id="listbox1" class="listbox-option-text1">Popularité</div><!-- id="listbox-popularity" -->
+            <div class="dropdown-arrow"><i class="fa fa-solid fa-chevron-up"></i></div>          
+          </span><!--tabindex ; button 1er celui sélectionné-->
 
-          <span tabindex="1" class="listbox-option option2" role="option" data-sort="title"  value="title">
-            <div id="listbox-title" class="listbox-option-text2">Titre</div>  
+          <span tabindex="5" class="listbox-option option2" role="button" data-sort="title" value="title">
+            <div id="listbox2" class="listbox-option-text2">Titre</div><!-- id="listbox-title" -->  
           </span><!--tabindex ; button ? 2ème à sélectionner--> 
 
         </div>
@@ -83,7 +84,7 @@
 
 
     <!--Contact form modal-->
-    <div id="contact_modal" role="dialog" aria-hidden="true" aria-modal="true" aria-describedby="contact modal">
+    <div id="contact_modal" role="dialog" aria-hidden="true" aria-modal="true" aria-describedby="contact modal"><!---->
 			<div class="modal">
 				<header>
           <div class="contact_header_top">
@@ -97,13 +98,13 @@
 				<form method="post" action="" role="form" aria-label="photographer contact form">
 					<fieldset role="group"> <!--aria-labelledby="contact information" <Fieldset> à la place de <div> -->
 						<label for="firstname">Prénom</label>
-						<input type="text" name="firstname" id="firstname" />
+						<input tabindex="0" type="text" name="firstname" id="firstname" />
             <label for="lastname">Nom</label>
-						<input type="text" name="lastname" id="lastname" />
+						<input tabindex="0" type="text" name="lastname" id="lastname" />
             <label for="email">Email</label>
-						<input type="email" name="email" id="email" />
+						<input tabindex="0" type="email" name="email" id="email" />
             <label for="message">Votre message</label>
-            <textarea id="message"></textarea>
+            <textarea tabindex="0" id="message"></textarea>
           </fieldset>
           <button type="submit" class="contact-button">Envoyer</button>
 				</form>

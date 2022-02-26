@@ -10,7 +10,6 @@
 /* Photograph header */
 
 .photograph-header {
-    /*display: flex;*/ 
     justify-content: space-between;
     align-items: center;
     background-color: #FAFAFA;
@@ -75,6 +74,7 @@ object-fit: cover;
     color: #000;
     background-color: #db8876;
     outline: none;
+    border: 2px solid #901C1C;
 }
 
 
@@ -128,6 +128,7 @@ object-fit: cover;
 .heart {
     width: 10%; 
     color: #901C1C;
+    cursor: pointer;
 }
 
 
