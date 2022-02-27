@@ -32,6 +32,7 @@ function displayModal() {
   const modal = document.getElementById('contact_modal');
   modal.style.display = 'block';
   main.style.display = 'none'; 
+  footer.style.visibility = 'hidden'; 
   onOpenModal();
   console.log(onOpenModal)
 }
@@ -40,5 +41,6 @@ function closeModal() {
   const modal = document.getElementById('contact_modal');
   modal.style.display = 'none';
   main.style.display = 'block'; 
+  footer.style.visibility = 'visible'; 
   onCloseModal();
 }
