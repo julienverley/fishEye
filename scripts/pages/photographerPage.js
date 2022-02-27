@@ -117,13 +117,13 @@ const displayMedias = (medias) => {
         }
       });
 
-      /** Lightbox
-         * Click on mediasCardsFigure to display
+
+        /** Lightbox
+         * Get image or video media (used for click and keyboard)
          */
-      figure.firstChild.addEventListener('click', () => {
         const sourceMediaClicked = figure.firstChild.src;
         const titleMediaClicked = figure.getElementsByTagName('h2')[0].textContent;
-        if (sourceMediaClicked.match(imgRegex)) {
+        const mediaGetImage = () => {
           const img = document.createElement('img');
           const title = document.createElement('h2');
           const lightboxContainer = document.querySelector(
@@ -135,7 +135,8 @@ const displayMedias = (medias) => {
           lightboxContainer.appendChild(title);
           currentLightboxIndex = index;
           displayLightbox();
-        } else if (sourceMediaClicked.match(videoRegex)) {
+        }
+        const mediaGetVideo = () => {
           const video = document.createElement('video');
           const title = document.createElement('h2');
           video.src = sourceMediaClicked;
@@ -149,8 +150,33 @@ const displayMedias = (medias) => {
           currentLightboxIndex = index;
           displayLightbox();
         }
+
+      /** Lightbox
+         * Click on mediasCardsFigure to open
+         */
+      figure.firstChild.addEventListener('click', () => {
+        if (sourceMediaClicked.match(imgRegex)) { 
+          mediaGetImage(); 
+        } else if (sourceMediaClicked.match(videoRegex)) { 
+          mediaGetVideo(); 
+        }
       });
-    }
+
+      /** Lightbox
+       * Press keyboard to open
+       */ 
+      figure.addEventListener('keyup', (event) => {
+        event.preventDefault();
+        if (event.code === 'Enter') {
+          if (sourceMediaClicked.match(imgRegex)) { 
+            mediaGetImage(); 
+          } else if (sourceMediaClicked.match(videoRegex)) { 
+            mediaGetVideo(); 
+          } 
+        }
+      }); 
+    } // for... 
+
 
     /**
      * Display total of likes into the DOM
@@ -325,29 +351,18 @@ option2.addEventListener('keyup', (event) => {
       sortByPopularity(); 
     }
   });
-
-// Open lightbox with keyboard on figure
-// const option2 = document.querySelector('.option2'); 
-figure.firstChild.addEventListener('keyup', (event) => {
-  event.preventDefault();
-  if (event.code === 'Enter') {
-    displayLightbox()
-  }
-});
-
-
-
-
-
-
-
-
-
-
-
   
-  
-};
+}; // displayMedias
+
+
+
+
+
+
+
+
+
+
 
 /** Lightbox
 * Navigation next

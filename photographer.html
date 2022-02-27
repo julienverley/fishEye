@@ -34,7 +34,7 @@
 
 
       <!-- Dropdown menu -->
-      <label tabindex="5" for=""selection aria-label="Sort by menu">Trier par <!-- id="listbox-container" -->
+      <label tabindex="5" id="trier-par" for=""selection aria-label="Sort by menu">Trier par <!-- id="listbox-container" -->
       <div class="dropdown"><!--ajouter aria--> 
         <button tabindex="-1" class="dropbtn" aria-haspopup="true" aria-expanded="false" role="select">
           <div class="dropbtn-text">Popularité</div> 
@@ -97,16 +97,16 @@
         </header>
 				<form method="post" action="" role="form" aria-label="photographer contact form">
 					<fieldset role="group"> <!--aria-labelledby="contact information" <Fieldset> à la place de <div> -->
-						<label for="firstname">Prénom</label>
+						<label tabindex="0" for="firstname">Prénom</label>
 						<input tabindex="0" type="text" name="firstname" id="firstname" />
-            <label for="lastname">Nom</label>
+            <label tabindex="0" for="lastname">Nom</label>
 						<input tabindex="0" type="text" name="lastname" id="lastname" />
-            <label for="email">Email</label>
+            <label tabindex="0" for="email">Email</label>
 						<input tabindex="0" type="email" name="email" id="email" />
-            <label for="message">Votre message</label>
+            <label tabindex="0" for="message">Votre message</label>
             <textarea tabindex="0" id="message"></textarea>
           </fieldset>
-          <button type="submit" class="contact-button">Envoyer</button>
+          <button tabindex="0" type="submit" class="contact-button">Envoyer</button>
 				</form>
 			</div>
 		</div>
