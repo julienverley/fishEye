@@ -5,7 +5,7 @@
     top: 50%; /* centered */
     left: 50%; /* centered */
     transform: translate(-50%, -50%); /* centered */
-    height: 90vh; 
+    height: 70vh; 
     max-height: 900px; 
     width: 599px;
     display: flex;
@@ -41,12 +41,16 @@
     border: none;
 }
 
+.modal header div h2 {
+    font-size: 54px;
+}
+
 .modal header h2 {
     justify-content: flex-end;
-    font-size: 64px;
-    font-weight: normal;
     margin: 0;    
     text-align: left;
+    font-weight: bold;
+    font-size: 50px;
 }
 
 form {
