@@ -12,20 +12,20 @@ const photographerFactoryPage = (photographerObject) => {
     const article = document.createElement('article');
     const div = document.createElement('div');
     const img = document.createElement('img');
-    img.setAttribute('tabindex', '5')
+    img.setAttribute('tabindex', '4')
     img.setAttribute('src', picture);
-    img.setAttribute('alt', `${name} photographer portrait`);
+    img.setAttribute('alt', `${name}`);
     const h1 = document.createElement('h1');
     h1.textContent = name;
-    h1.setAttribute('tabindex', '5')
+    h1.setAttribute('tabindex', '4')
     const h2 = document.createElement('h2');
     h2.textContent = `${city}, ${country}`;
-    h2.setAttribute('tabindex', '5')
+    h2.setAttribute('tabindex', '4')
     const h3 = document.createElement('h3');
     h3.textContent = tagline;
-    h3.setAttribute('tabindex', '5')
+    h3.setAttribute('tabindex', '4')
     const span = document.createElement('span');
-    span.innerHTML = '<button tabindex="5" class="contact-button" role="button" onclick="displayModal()">Contactez-moi</button>';
+    span.innerHTML = '<button tabindex="4" class="contact-button" role="button" onclick="displayModal()">Contactez-moi</button>';
     article.appendChild(div);
     div.appendChild(h1);
     div.appendChild(h2);

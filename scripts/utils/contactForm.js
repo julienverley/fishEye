@@ -13,7 +13,7 @@
  };
 
 /**  AddEventListeners
- * ... to close modal on escape or click
+ * Close modal on key or click
  * */
 document.addEventListener('keyup', (event) => {
   event.preventDefault();
@@ -34,7 +34,6 @@ function displayModal() {
   main.style.display = 'none'; 
   footer.style.visibility = 'hidden'; 
   onOpenModal();
-  console.log(onOpenModal)
 }
 
 function closeModal() {

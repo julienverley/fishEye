@@ -49,12 +49,12 @@ const displayPhotographer = (photographer) => {
 };
 
 /** Footer **
-  * Price display
+  * Price display DOM
   */
 const displayPrice = (price) => {
   const divPrice = document.createElement('div');
   divPrice.classList.add('price');
-  const priceCardDOM = `<h2>${price}€ / jour</h2>`;
+  const priceCardDOM = `<h2 tabindex="4">${price}€ / jour</h2>`;
   divPrice.innerHTML = priceCardDOM;
   footer.append(divPrice);
 };
@@ -97,25 +97,61 @@ const displayMedias = (medias) => {
       let mediasLikesNumber = parseInt(mediasLikes, 10); // typeof = 10 numbers
       mediasLikesTotal += mediasLikesNumber; // 10 résultats incrémentés
 
+
+
+
+
+      // Likes, add or substract like to mediasLikesNumber
+      const addLike = () => {
+        mediasLikesNumber += 1; 
+        figure.getElementsByTagName('h2')[1].textContent = mediasLikesNumber;
+        mediasLikesTotal++;
+        removeTotalLikes();
+        updateTotalLikes();
+      }
+      const substractLike = () => {
+        mediasLikesNumber -= 1;
+        figure.getElementsByTagName('h2')[1].textContent = mediasLikesNumber;
+        mediasLikesTotal--;
+        removeTotalLikes();
+        updateTotalLikes();
+      }
+
       /** MediasCardsFigure
-         * Likes (popularity)
+         * Likes, add or substract on click 
          */
       figure.querySelector('.heart').addEventListener('click', (e) => {
         figure.classList.toggle('is_liked'); // toute la card
         if (figure.classList.contains('is_liked')) {
-          mediasLikesNumber += 1; // problème : +0 puis +1
-          figure.getElementsByTagName('h2')[1].textContent = mediasLikesNumber;
-          mediasLikesTotal++;
-          removeTotalLikes();
-          updateTotalLikes();
+          addLike();
         } else {
-          mediasLikesNumber -= 1;
-          figure.getElementsByTagName('h2')[1].textContent = mediasLikesNumber;
-          mediasLikesTotal--;
-          removeTotalLikes();
-          updateTotalLikes();
+          substractLike(); 
         }
       });
+
+      /** MediasCardsFigure
+         * Likes, add or substract on keyup 
+         */
+       figure.querySelector('.heart').addEventListener('keyup', (event) => {
+         event.preventDefault(); 
+         event.stopPropagation(); ///////////////////////////// si problème, vérifier ici ////////////
+         if (event.code === 'Enter') {
+          figure.classList.toggle('is_liked'); // toute la card
+            if (figure.classList.contains('is_liked')) {
+              addLike();
+            } else {
+              substractLike(); 
+            } 
+         }
+      });
+
+
+
+
+
+
+
+
 
 
         /** Lightbox
@@ -131,6 +167,13 @@ const displayMedias = (medias) => {
           );
           img.src = sourceMediaClicked;
           title.textContent = titleMediaClicked;
+          
+          title.setAttribute('tabindex', '1') ///////////////////////
+          title.setAttribute('role', 'Text') ///////////////////////
+          title.setAttribute('aria-hidden', 'false') ///////////////////////
+          title.setAttribute('aria-label', `${titleMediaClicked}`) /////////////////////// 
+          title.classList.add("lightbox-title") /////////////////////
+          
           lightboxContainer.appendChild(img);
           lightboxContainer.appendChild(title);
           currentLightboxIndex = index;
@@ -141,6 +184,13 @@ const displayMedias = (medias) => {
           const title = document.createElement('h2');
           video.src = sourceMediaClicked;
           title.textContent = titleMediaClicked;
+          
+          title.setAttribute('tabindex', '1') ///////////////////////
+          title.setAttribute('role', 'Text') ///////////////////////
+          title.setAttribute('aria-hidden', 'false') ///////////////////////
+          title.setAttribute('aria-label', `${titleMediaClicked}`) ///////////////////////
+          title.classList.add("lightbox-title") /////////////////////
+          
           video.controls = true;
           const lightboxContainer = document.querySelector(
             '.lightbox__container',
@@ -179,12 +229,12 @@ const displayMedias = (medias) => {
 
 
     /**
-     * Display total of likes into the DOM
+     * Display total of likes DOM
      */
     const displayTotalLikes = () => {
       const divLikes = document.createElement('div');
       divLikes.classList.add('total_likes');
-      const mediasLikesTotalCardDOM = `<h2 id="likes">${mediasLikesTotal}</h2>
+      const mediasLikesTotalCardDOM = `<h2 tabindex="4" id="likes">${mediasLikesTotal}</h2>
                                             <div class="heart filter_icons"><i class="fa fa-heart fa-lg" title="heart icon"></i></div>`;
       divLikes.innerHTML = mediasLikesTotalCardDOM;
       footer.prepend(divLikes);
@@ -201,6 +251,7 @@ const displayMedias = (medias) => {
     const updateTotalLikes = () => {
       document.getElementById('likes').textContent = mediasLikesTotal;
     };
+
 
     /** Lightbox
      * Close, left and right with keys
@@ -392,6 +443,11 @@ const lightBoxNext = (medias) => {
     const h2 = document.createElement('h2'); 
     h2.innerHTML = newElementTitle; 
     lightboxContainer.append(h2); 
+    h2.setAttribute('tabindex', '1') ///////////////////////
+    h2.setAttribute('role', 'Text') ///////////////////////
+    h2.setAttribute('aria-label', `${newElementTitle}`)
+    h2.classList.add("lightbox-title") /////////////////////
+
   } else if (newElementSrc.match(videoRegex)) {
     const video = document.createElement('video'); 
     video.src = newElementSrc;
@@ -400,6 +456,10 @@ const lightBoxNext = (medias) => {
     const h2 = document.createElement('h2');
     h2.innerHTML = newElementTitle; 
     lightboxContainer.append(h2); 
+    h2.setAttribute('tabindex', '1') ///////////////////////
+    h2.setAttribute('role', 'Text') ///////////////////////
+    h2.setAttribute('aria-label', `${newElementTitle}`)
+    h2.classList.add("lightbox-title") /////////////////////
   }
 };
 
@@ -433,6 +493,11 @@ const lightboxPrevious = (medias) => {
     const h2 = document.createElement('h2'); 
     h2.innerHTML = newElementTitle; 
     lightboxContainer.append(h2); 
+    h2.setAttribute('tabindex', '1') ///////////////////////
+    h2.setAttribute('role', 'Text') ///////////////////////
+    h2.setAttribute('aria-label', `${newElementTitle}`)
+    h2.classList.add("lightbox-title") /////////////////////
+
   } else if (newElementSrc.match(videoRegex)) {
     const video = document.createElement('video'); 
     video.src = newElementSrc;
@@ -441,5 +506,9 @@ const lightboxPrevious = (medias) => {
     const h2 = document.createElement('h2'); 
     h2.innerHTML = newElementTitle; 
     lightboxContainer.append(h2); 
+    h2.setAttribute('tabindex', '1') ///////////////////////
+    h2.setAttribute('role', 'Text') ///////////////////////
+    h2.setAttribute('aria-label', `${newElementTitle}`)
+    h2.classList.add("lightbox-title") /////////////////////
   }
 };

@@ -18,9 +18,9 @@
   <body>
    
     <!-- HEADER -->
-    <header role="banner">
-      <a href="./index.html" tabindex="5">
-        <img src="assets/images/logo.png" class="logo" alt="Fisheye logo"/>
+    <header id="header" role="Image link">
+      <a href="./index.html" tabindex="4">
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/>
       </a>
     </header>
    
@@ -34,29 +34,29 @@
 
 
       <!-- Dropdown menu -->
-      <label tabindex="5" id="trier-par" for=""selection aria-label="Sort by menu">Trier par <!-- id="listbox-container" -->
-      <div class="dropdown"><!--ajouter aria--> 
-        <button tabindex="-1" class="dropbtn" aria-haspopup="true" aria-expanded="false" role="select">
-          <div class="dropbtn-text">Popularité</div> 
-        </button> <!-- innertText en JS -->
-        
-        <div tabindex="5" id='dropdownArrow' class="dropdown-arrow"><i class="fa fa-solid fa-chevron-down" onclick="showDropdown()"></i></div>
-        <!--<div class="svg-arrow"></div>-->      
-        
-        <div id="dropdownContainer" class="dropdown-content"><!-- .show ou pas -->
+      <label tabindex="4" id="trier-par" for=""selection aria-label="Sort by menu">Trier par <!-- id="listbox-container" -->
+        <div class="dropdown"><!--ajouter aria--> 
+          <button tabindex="-1" class="dropbtn" aria-haspopup="listbox" aria-expanded="true" aria-activedescendant="listbox1" role="listbox"><!--Avant : aria-expanded="false" role="select"> -->
+            <div class="dropbtn-text">Popularité</div> 
+          </button> <!-- innertText en JS -->
+          
+          <div tabindex="4" id='dropdownArrow' class="dropdown-arrow"><i class="fa fa-solid fa-chevron-down" onclick="showDropdown()"></i></div>
+          <!--<div class="svg-arrow"></div>-->      
+          
+          <div id="dropdownContainer" class="dropdown-content"><!-- .show ou pas -->
 
-          <span tabindex="5" class="listbox-option option1 white-border" role="button" data-sort="popularity" value="popularity">
-            <div id="listbox1" class="listbox-option-text1">Popularité</div><!-- id="listbox-popularity" -->
-            <div class="dropdown-arrow"><i class="fa fa-solid fa-chevron-up"></i></div>          
-          </span><!--tabindex ; button 1er celui sélectionné-->
+            <span tabindex="4" class="listbox-option option1 white-border" role="button" data-sort="popularity" value="popularity">
+              <div id="listbox1" class="listbox-option-text1">Popularité</div><!-- id="listbox-popularity" -->
+              <div class="dropdown-arrow"><i class="fa fa-solid fa-chevron-up"></i></div>          
+            </span><!--tabindex ; button 1er celui sélectionné-->
 
-          <span tabindex="5" class="listbox-option option2" role="button" data-sort="title" value="title">
-            <div id="listbox2" class="listbox-option-text2">Titre</div><!-- id="listbox-title" -->  
-          </span><!--tabindex ; button ? 2ème à sélectionner--> 
+            <span tabindex="4" class="listbox-option option2" role="button" data-sort="title" value="title">
+              <div id="listbox2" class="listbox-option-text2">Titre</div><!-- id="listbox-title" -->  
+            </span><!--tabindex ; button ? 2ème à sélectionner--> 
 
+          </div>
         </div>
-      </div>
-    </label> 
+      </label> 
 
 
       <!-- SECTION Photographer medias-->
@@ -66,19 +66,19 @@
     </main>
 
       <!--Photographer likes & price-->
-      <footer class="footer" role="Content information" aria-label="total medias likes and price a day">
+      <footer tabindex="4" class="footer" role="Content information" aria-label="total likes and price">
       </footer>
 
     
 
 
     <!--Lightbox modal-->
-    <div id="lightbox" role="dialog" aria-hidden="true"><!--onclick="displayLightbox()"-->
-      <button class="lightbox-button lightbox__next">Suivant</button>
-      <button class="lightbox-button lightbox__prev">Précédent</button>
-      <button class="lightbox-button lightbox__close" onclick="closeLightbox()">Fermer</button><!--onclick="closeLightbox()"-->
+    <div id="lightbox" role="dialog" aria-label="Image closeup view"><!--aria-hidden="true" onclick="displayLightbox()"-->
+      <button role="link" aria-label="Next image" class="lightbox-button lightbox__next">Suivant</button>
+      <button role="link" aria-label="Previous image" class="lightbox-button lightbox__prev">Précédent</button>
+      <button role="button" aria-label="Close dialog" class="lightbox-button lightbox__close" onclick="closeLightbox()">Fermer</button><!--onclick="closeLightbox()"-->
       <div class="lightbox__container">
-        <div class="lightbox-media-title"></div>
+        <div class="lightbox-media-title"><!-- role="text" -->
       </div>
     </div>
 
