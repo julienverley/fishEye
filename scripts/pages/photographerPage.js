@@ -29,6 +29,7 @@ const initPhotographerPage = () => {
 initPhotographerPage(); // Launch init
 
 
+
  // HEADER 
  // Display photographer card
 const displayPhotographer = (photographer) => {
@@ -37,6 +38,7 @@ const displayPhotographer = (photographer) => {
   const userCardDOM = photographerModel.createPhotographerCardDOMPage(); // userCardDOM = objet photographer créé dans le DOM
   photographerHeader.appendChild(userCardDOM); // ajoute un node userCardDOM
 };
+
 
 
  // FOOTER
@@ -50,47 +52,37 @@ const displayPrice = (price) => {
 };
 
 
+
 // MEDIAS GALLERY
 // Display medias, display lightbox, sort medias
 const displayMedias = (medias) => {
   const mediasCards = document.querySelector('.photograph-media-cards'); // Add mediasCards node 
 
-  /** MediasCardsFigure gallery
-   * Likes and lightbox display
-   */
+  // MEDIAS DOM
+  // Likes and lightbox display
   const displayMediaDom = (medias) => {
-    // refactorisé
-    /** medias forEach
-     * Display
-     */
+    
+    // IMAGE OR VIDEO (cf. factory)
     medias.forEach((media) => {
-      if (media.hasOwnProperty('image')) {
-        // return boolean true of false, if media = image...
-        mediasCards.append(createImageFactoryPage(media)); // ...create DOM image element
+      if (media.hasOwnProperty('image')) { // Return boolean, true of false, if image...
+        mediasCards.append(createImageFactoryPage(media)); 
       } else if (media.hasOwnProperty('video')) {
-        // else if media = video...
-        mediasCards.append(createVideoFactoryPage(media)); // ...create DOM video element
+        mediasCards.append(createVideoFactoryPage(media)); 
       }
     });
 
-    /** mediasCardsFigure
-     * Loop, for... of
-     */
+    // FIGURES 
+    // Loop, for... of, creation of likes and lightbox
     const mediasCardsFigure = document.querySelectorAll(
       '.photograph-media-cards > figure',
     );
-
-    for (const [index, figure] of mediasCardsFigure.entries()) {
-      // [index = key, figure = value]
+    for (const [index, figure] of mediasCardsFigure.entries()) { // [index(key), figure(value)]
       const mediasLikes = figure.getElementsByTagName('h2')[1].textContent;
-      let mediasLikesNumber = parseInt(mediasLikes, 10); // typeof = 10 numbers
-      mediasLikesTotal += mediasLikesNumber; // 10 résultats incrémentés
+      let mediasLikesNumber = parseInt(mediasLikes, 10); // typeof: numbers
+      mediasLikesTotal += mediasLikesNumber; 
 
-
-
-
-
-      // Likes, add or substract like to mediasLikesNumber
+      // LIKES 
+      // Add or substract like to figure and total
       const addLike = () => {
         mediasLikesNumber += 1; 
         figure.getElementsByTagName('h2')[1].textContent = mediasLikesNumber;
@@ -105,27 +97,23 @@ const displayMedias = (medias) => {
         removeTotalLikes();
         updateTotalLikes();
       }
-
-      /** MediasCardsFigure
-         * Likes, add or substract on click 
-         */
-      figure.querySelector('.heart').addEventListener('click', (e) => {
-        figure.classList.toggle('is_liked'); // toute la card
+      // LIKES 
+      // Event: click 
+      figure.querySelector('.heart').addEventListener('click', () => {
+        figure.classList.toggle('is_liked'); 
         if (figure.classList.contains('is_liked')) {
           addLike();
         } else {
           substractLike(); 
         }
       });
-
-      /** MediasCardsFigure
-         * Likes, add or substract on keyup 
-         */
+       // LIKES 
+       // Event: keyup 
        figure.querySelector('.heart').addEventListener('keyup', (event) => {
          event.preventDefault(); 
-         event.stopPropagation(); ///////////////////////////// si problème, vérifier ici ////////////
+         event.stopPropagation();
          if (event.code === 'Enter') {
-          figure.classList.toggle('is_liked'); // toute la card
+          figure.classList.toggle('is_liked'); 
             if (figure.classList.contains('is_liked')) {
               addLike();
             } else {
@@ -134,65 +122,42 @@ const displayMedias = (medias) => {
          }
       });
 
-
-
-
-
-
-
-
-
-
-        /** Lightbox
-         * Get image or video media (used for click and keyboard)
-         */
-        const sourceMediaClicked = figure.firstChild.src;
-        const titleMediaClicked = figure.getElementsByTagName('h2')[0].textContent;
-        const mediaGetImage = () => {
-          const img = document.createElement('img');
-          const title = document.createElement('h2');
-          const lightboxContainer = document.querySelector(
-            '.lightbox__container',
-          );
-          img.src = sourceMediaClicked;
-          title.textContent = titleMediaClicked;
-          
-          title.setAttribute('tabindex', '1') ///////////////////////
-          title.setAttribute('role', 'Text') ///////////////////////
-          title.setAttribute('aria-hidden', 'false') ///////////////////////
-          title.setAttribute('aria-label', `${titleMediaClicked}`) /////////////////////// 
-          title.classList.add("lightbox-title") /////////////////////
-          
-          lightboxContainer.appendChild(img);
-          lightboxContainer.appendChild(title);
-          currentLightboxIndex = index;
-          displayLightbox();
-        }
-        const mediaGetVideo = () => {
-          const video = document.createElement('video');
-          const title = document.createElement('h2');
-          video.src = sourceMediaClicked;
-          title.textContent = titleMediaClicked;
-          
-          title.setAttribute('tabindex', '1') ///////////////////////
-          title.setAttribute('role', 'Text') ///////////////////////
-          title.setAttribute('aria-hidden', 'false') ///////////////////////
-          title.setAttribute('aria-label', `${titleMediaClicked}`) ///////////////////////
-          title.classList.add("lightbox-title") /////////////////////
-          
-          video.controls = true;
-          const lightboxContainer = document.querySelector(
-            '.lightbox__container',
-          );
-          lightboxContainer.append(video);
-          lightboxContainer.append(title);
-          currentLightboxIndex = index;
-          displayLightbox();
-        }
-
-      /** Lightbox
-         * Click on mediasCardsFigure to open
-         */
+      // LIGHTBOX
+      // Get image or video media (used for click and keyboard)
+      const sourceMediaClicked = figure.firstChild.src;
+      const titleMediaClicked = figure.getElementsByTagName('h2')[0].textContent;
+      const lightboxContainer = document.querySelector(
+        '.lightbox__container',
+      );
+      const title = document.createElement('h2');
+      // Add informations
+      const mediaImageVideoInformations = () => {
+        title.textContent = titleMediaClicked;
+        title.setAttribute('tabindex', '1')
+        title.setAttribute('role', 'Text') 
+        title.setAttribute('aria-hidden', 'false') 
+        title.setAttribute('aria-label', `${titleMediaClicked}`)  
+        title.classList.add("lightbox-title")
+        currentLightboxIndex = index;
+        lightboxContainer.appendChild(title);
+      }
+      // Get image or video and display
+      const mediaGetImage = () => {
+        const img = document.createElement('img');
+        img.src = sourceMediaClicked;
+        lightboxContainer.appendChild(img);
+        mediaImageVideoInformations(); 
+        displayLightbox(); // lightbox.js
+      }
+      const mediaGetVideo = () => {
+        const video = document.createElement('video');
+        video.src = sourceMediaClicked;
+        video.controls = true;
+        lightboxContainer.append(video);
+        mediaImageVideoInformations();
+        displayLightbox();
+      }
+      // Open on click
       figure.firstChild.addEventListener('click', () => {
         if (sourceMediaClicked.match(imgRegex)) { 
           mediaGetImage(); 
@@ -200,10 +165,7 @@ const displayMedias = (medias) => {
           mediaGetVideo(); 
         }
       });
-
-      /** Lightbox
-       * Press keyboard to open
-       */ 
+      // Open on keyup
       figure.addEventListener('keyup', (event) => {
         event.preventDefault();
         if (event.code === 'Enter') {
@@ -214,12 +176,10 @@ const displayMedias = (medias) => {
           } 
         }
       }); 
-    } // for... 
+    } // for... of
 
-
-    /**
-     * Display total of likes DOM
-     */
+    // LIKES 
+    // Display total likes
     const displayTotalLikes = () => {
       const divLikes = document.createElement('div');
       divLikes.classList.add('total_likes');
@@ -228,23 +188,18 @@ const displayMedias = (medias) => {
       divLikes.innerHTML = mediasLikesTotalCardDOM;
       footer.prepend(divLikes);
     };
-    displayTotalLikes(); // En dehors de la boucle, pour afficher le dernier résultat
+    displayTotalLikes(); 
 
-    /**
-     * Total likes upadate
-     */
+    // Update total likes
     const removeTotalLikes = () => {
-      // cf. react useStat //
       document.getElementById('likes').textContent = '';
     };
     const updateTotalLikes = () => {
       document.getElementById('likes').textContent = mediasLikesTotal;
     };
-
-
-    /** Lightbox
-     * Close, left and right with keys
-     */
+    
+    // LIGHTBOX
+    // Keyup events, navigation 
     document.addEventListener('keyup', (event) => { // mis sur le même addEventListener
       event.stopImmediatePropagation();
       event.preventDefault();
@@ -258,10 +213,7 @@ const displayMedias = (medias) => {
         lightBoxNext(medias);
       }
     });
-
-    /**
-     * lightbox, previous, next, close buttons
-     */
+    // Click events, navigation
     document
       .querySelector('.lightbox__prev')
       .addEventListener('click', (event) => {
@@ -291,10 +243,8 @@ const displayMedias = (medias) => {
     }
   }
 
-  /** Medias gallery
-   * Sort by name or popularity
-   */
-  displayMediaDom(medias); // Ajouté par Antoine
+  // SORT 
+  displayMediaDom(medias); 
   const dropdownContainer = document.getElementById('dropdownContainer');
   medias.sort((a, b) => {
     if (a.likes > b.likes) {
@@ -306,26 +256,19 @@ const displayMedias = (medias) => {
     return 0;
   });
   removeAllChildNodes(mediasCards);
-
   mediasLikesTotal = 0;
   document.querySelector('.total_likes').remove();
-  displayMediaDom(medias); // lightbox index modifié
+  displayMediaDom(medias);
 
-  // Sort by title function 
+  // Sort by title  
   const sortByTitle = () => {
-    /* const element = document.querySelector('.option2') ////////////////////////////
-    element.classList.add("clickPopularity"); //////////////////////////////////////////////////////// */
-
     document.querySelector('.dropbtn-text').textContent = "Titre"
-  
     document.querySelector('.option1').setAttribute('data-sort', 'title')
     document.querySelector('.option1').setAttribute('value', 'title')
     document.querySelector('.listbox-option-text1').textContent = "Titre"
-
     document.querySelector('.option2').setAttribute('data-sort', 'popularity')
     document.querySelector('.option2').setAttribute('value', 'popularity')
     document.querySelector('.listbox-option-text2').textContent = "Popularité"
-
     medias.sort((a, b) => {
       if (a.title < b.title) {
         return -1;
@@ -337,22 +280,19 @@ const displayMedias = (medias) => {
     });
     removeAllChildNodes(mediasCards);
     mediasLikesTotal = 0;
-    displayMediaDom(medias); // lightbox index modifié
+    displayMediaDom(medias);
     document.querySelector('.total_likes').remove();
   }
   
-  // Sort by popularity function 
+  // Sort by popularity  
   const sortByPopularity = () => {
     document.querySelector('.dropbtn-text').textContent = "Popularité"
-
     document.querySelector('.option1').setAttribute('data-sort', 'popularity')
     document.querySelector('.option1').setAttribute('value', 'popularity')
     document.querySelector('.listbox-option-text1').textContent = "Popularité"
-    
     document.querySelector('.option2').setAttribute('data-sort', 'title')
     document.querySelector('.option2').setAttribute('value', 'title')
     document.querySelector('.listbox-option-text2').textContent = "Titre"
-
     medias.sort((a, b) => {
       if (a.likes > b.likes) {
         return -1;
@@ -365,25 +305,24 @@ const displayMedias = (medias) => {
     removeAllChildNodes(mediasCards);
     mediasLikesTotal = 0;
     document.querySelector('.total_likes').remove();
-    displayMediaDom(medias); // lightbox index modifié
+    displayMediaDom(medias);
   }
 
-// Sort by popularity with keyboard
-const option2 = document.querySelector('.option2'); 
-option2.addEventListener('keyup', (event) => {
-  event.preventDefault();
-  if (event.code === 'Enter') {
-    optionText = event.target.textContent.trim() // enlever les espaces avant et après 
-    if (optionText === "Popularité") {
-      sortByPopularity()
-    } else if (optionText === "Titre"){
-      sortByTitle()
+  // Keyup event, dropdown, sort by popularity or title
+  const option2 = document.querySelector('.option2'); 
+  option2.addEventListener('keyup', (event) => {
+    event.preventDefault();
+    if (event.code === 'Enter') {
+      optionText = event.target.textContent.trim() // enlever les espaces avant et après 
+      if (optionText === "Popularité") {
+        sortByPopularity()
+      } else if (optionText === "Titre"){
+        sortByTitle()
+      }
     }
-    //sortByTitle();
-  }
-});
+  });
 
-  // Click on dropdown and sort  
+  // Click event, dropdown, sort by popularity or title
   dropdownContainer.addEventListener('click', (e) => {
     if (e.target.textContent == 'Titre') {
       sortByTitle(); 
@@ -396,17 +335,8 @@ option2.addEventListener('keyup', (event) => {
 
 
 
-
-
-
-
-
-
-
-
-/** Lightbox
-* Navigation next
-*/
+// LIGHTBOX
+// Navigation, next
 const lightBoxNext = (medias) => {
   if (currentLightboxIndex === medias.length - 1) {
     // lorsque index[0] (et que click previous)...
