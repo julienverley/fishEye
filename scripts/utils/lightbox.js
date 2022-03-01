@@ -4,16 +4,10 @@
 const header = document.getElementById('header')
 const lightbox = document.getElementById('lightbox');
 const lightboxContainer = document.querySelector('.lightbox__container');
-// const lightboxTitle = document.querySelector('.lightbox-title') ///////////// ne fonctionne pas 
-console.log(lightboxTitle);
-
 function displayLightbox() {
   lightbox.style.display = 'block';
   lightbox.setAttribute('aria-hidden', 'false')
-  lightbox.setAttribute('tabindex', '1')
-
-  // lightboxTitle.setAttribute('tabindex', '0') ///////////// ne fonctionne pas 
-  
+  lightbox.setAttribute('tabindex', '1')  
   lightboxContainer.setAttribute('tabindex', '1')
   footer.setAttribute('aria-hidden', 'true')
   footer.removeAttribute('tabindex')

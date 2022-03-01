@@ -28,7 +28,7 @@ document.querySelector('.modal__close').addEventListener('click', () => {
 /**  Open or close modal
  * 
  */
-function displayModal() {
+function displayModal() { // onclick
   const modal = document.getElementById('contact_modal');
   modal.style.display = 'block';
   main.style.display = 'none'; 
