@@ -1,14 +1,13 @@
-/**
-* Photographer header card DOM
-*/
-const photographerFactoryPage = (photographerObject) => {
-// function attend un objet à traiter ; assigne les keys values aux 7 variables name, id etc.
+// Photographer page factory
+
+// Create photographer page DOM header card   
+const photographerFactoryPage = (photographerObject) => { // Get photographer object
   const {
     name, portrait, city, country, tagline,
-  } = photographerObject; // ou const name = dataPage.name etc. pour chaque key
+  } = photographerObject; // key/value name, portrait etc. 
   const picture = `assets/photographersID/${portrait}`;
 
-  const createPhotographerCardDOMPage = () => { // PhotographerCardDOMPage créée dans le DOM
+  const createPhotographerCardDOMPage = () => { // Build DOM
     const article = document.createElement('article');
     const div = document.createElement('div');
     const img = document.createElement('img');
@@ -35,14 +34,13 @@ const photographerFactoryPage = (photographerObject) => {
     return article;
   };
 
-  return { // factory function returns un objet
+  return { // an object
     createPhotographerCardDOMPage,
   };
 };
 
-/**
- * Photographer gallery DOM
- */
+
+// Create photographer page DOM gallery figures   
 const createImageFactoryPage = (mediaObject) => { // cf. Fromscratch 3/6 2'02
   const {
     photographerId, title, image, likes,

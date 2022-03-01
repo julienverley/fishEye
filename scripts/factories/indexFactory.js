@@ -1,14 +1,17 @@
-function photographerFactory(data) {
+// Index photographers factory
+
+// Create index page DOM photographer article
+function photographerFactory(data) { // Get data (object)
   const {
     name, id, portrait, city, country, tagline, price,
   } = data;
-  const picture = `assets/photographersID/${portrait}`;
+  const picture = `assets/photographersID/${portrait}`; // Get .jpg 
 
-  function getPhotographerCardDOM() {
+  function getPhotographerCardDOM() { // Build DOM 
     const article = document.createElement('article');
     const a = document.createElement('a');
     a.setAttribute('href', `./photographer.html?id=${id}`);
-    article.setAttribute('id', id); // id des photographes sur articles
+    article.setAttribute('id', id);
     const img = document.createElement('img');
     img.setAttribute('src', picture);
     img.setAttribute('alt', `${name} photographer portrait`);
@@ -28,9 +31,9 @@ function photographerFactory(data) {
     a.appendChild(h5);
     a.appendChild(h6);
 
-    return (article); // return(article) renvoie l'article
+    return (article);
   }
-  return { // factory function return un objet, avec les deux fonctions
+  return { // an object keys/values
     name,
     id,
     portrait,

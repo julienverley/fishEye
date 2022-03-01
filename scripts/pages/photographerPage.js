@@ -1,56 +1,46 @@
-/* eslint-disable */
-/**
- * Variables
- */
+// Photographer page 
+
 const imgRegex = /^.*\.(jpg)$/;
 const videoRegex = /^.*\.(mp4)$/;
 const footer = document.querySelector('.footer');
 let currentLightboxIndex = 0;
 let mediasLikesTotal = 0;
 
-/**
-  * Init photographer et medias datas
-  */
+// Get photographers datas from .json
 const initPhotographerPage = () => {
-  // Return un objet, avec les infos de mediasToDisplay et photographerToDisplay
-  /*
-     Get photographer and medias datas
-     */
-  fetch('../../data/photographers.json') // récupère le .json
-    .then((response) => response.json()) // transformation en .json exploitable par JS
+  fetch('../../data/photographers.json') // Get .json
+    .then((response) => response.json()) // Make JS object
     .then((data) => {
-      // données à exploiter, on les utilise :
-      const searchParams = new URLSearchParams(window.location.search);
-      const photographerId = searchParams.get('id');
-      const photographerToDisplay = data.photographers.find(
+      const searchParams = new URLSearchParams(window.location.search); // Make a new empty URLSearchParams object
+      const photographerId = searchParams.get('id'); // Return the first found id value 
+      const photographerToDisplay = data.photographers.find( // = objects containing this photographer id
         (element) => element.id == photographerId,
       );
-      const mediasToDisplay = data.media.filter(
+      const mediasToDisplay = data.media.filter( // = objects containing this photographer id
         (element) => element.photographerId == photographerId,
       );
       const priceToDisplay = photographerToDisplay.price;
-      displayPhotographer(photographerToDisplay);
-      displayMedias(mediasToDisplay);
-      displayPrice(priceToDisplay);
+      displayPhotographer(photographerToDisplay); // Launch displayPhotographer
+      displayMedias(mediasToDisplay); // Launch displayMedias
+      displayPrice(priceToDisplay); // Launch displayPrice
       document.getElementById('photographerNameContact').textContent = photographerToDisplay.name;
     });
 };
-initPhotographerPage();
+initPhotographerPage(); // Launch init
 
-/** Header **
-  * Header Photographer card display
-  */
+
+ // HEADER 
+ // Display photographer card
 const displayPhotographer = (photographer) => {
-  // displayPhotographer reçoit ce qu'initPhotographerData renvoie comme paramètre
-  const photographerHeader = document.querySelector('.photograph-header'); // ajoute un node userCardDOM
-  const photographerModel = photographerFactoryPage(photographer); // photographerModel = objet photographer avec keys/values
+  const photographerHeader = document.querySelector('.photograph-header'); // Add userCardDOM node
+  const photographerModel = photographerFactoryPage(photographer); // Object keys/values
   const userCardDOM = photographerModel.createPhotographerCardDOMPage(); // userCardDOM = objet photographer créé dans le DOM
   photographerHeader.appendChild(userCardDOM); // ajoute un node userCardDOM
 };
 
-/** Footer **
-  * Price display DOM
-  */
+
+ // FOOTER
+ // Display price 
 const displayPrice = (price) => {
   const divPrice = document.createElement('div');
   divPrice.classList.add('price');
@@ -59,12 +49,11 @@ const displayPrice = (price) => {
   footer.append(divPrice);
 };
 
-/** Medias gallery **
- * Likes, lightbox, sort
- */
+
+// MEDIAS GALLERY
+// Display medias, display lightbox, sort medias
 const displayMedias = (medias) => {
-  // displayMedia reçoit ce qu'initPhotographerPage renvoie comme paramètre
-  const mediasCards = document.querySelector('.photograph-media-cards'); // ajoute un node mediasCards
+  const mediasCards = document.querySelector('.photograph-media-cards'); // Add mediasCards node 
 
   /** MediasCardsFigure gallery
    * Likes and lightbox display

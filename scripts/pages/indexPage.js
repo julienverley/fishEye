@@ -1,31 +1,29 @@
-function displayData(photographers) { // async function displayData(photographers) { ?
-  const photographersSection = document.querySelector('.photographers-section'); // ajoute un node userCardDOM // ajout du s à photograoher(s)
+// Index page 
 
-  photographers.forEach((photographer) => { //
-    const photographerModel = photographerFactory(photographer); // /factories/photographers.js
-    const userCardDOM = photographerModel.getPhotographerCardDOM(); // /factories/photographers.js
-    photographersSection.appendChild(userCardDOM); // ajoute un node userCardDOM
-
-    userCardDOM.addEventListener('click', () => { // au click...
-      window.location.href = `photographer.html?id=${photographer.id}`; // ...URL photographer + ID
-    });
-  });
-}
-
-async function init() { // async function init() { ?
-  // Récupère les datas des photographes
-
-  fetch('./data/photographers.json')
-    .then((response) => response.json())
+// Get photographers datas from .json
+function init() { 
+  fetch('./data/photographers.json') // Get .json
+    .then((response) => response.json()) // Make JS object
     .then((data) => {
       const { photographers } = data;
-      // = data (photographers) du json ; ou const photographers = data.photographers;
-      // console.log(data.photographers);
-      displayData(photographers);
+      displayData(photographers); // Launch the display 
     });
 }
 init();
 
-// event au click qui vise chaque id
-/*     const photographer1 = document.getElementById("243")
-    console.log(photographer1.innerHTML) */
+// Add userCardDOM nodes
+function displayData(photographers) { 
+  const photographersSection = document.querySelector('.photographers-section'); 
+  
+  // For each photographer
+  photographers.forEach((photographer) => {
+    const photographerModel = photographerFactory(photographer); // Get data and build DOM
+    const userCardDOM = photographerModel.getPhotographerCardDOM(); // Build DOM
+    photographersSection.appendChild(userCardDOM); // Create node userCardDOM
+
+    // On click event, URL  
+    userCardDOM.addEventListener('click', () => { 
+      window.location.href = `photographer.html?id=${photographer.id}`;
+    });
+  });
+}
