@@ -6,7 +6,6 @@
     margin: 0 50px;
 }
 
-
 /* Photograph header */
 
 .photograph-header {
@@ -18,7 +17,7 @@
 
 .photograph-header article {
     display: flex;
-    flex-direction: row; /* à revoir */ 
+    flex-direction: row; 
     align-items: center;
     justify-content: space-between;
     margin: 0;
@@ -79,13 +78,11 @@ object-fit: cover;
 
 /* Gallery medias */
 
-.photograph-media-cards { /* ... */
+.photograph-media-cards { 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
-    /* grid-template-columns: 33% 33% 33%; */
     margin-top: 50px;
-    
 }
 
 .card {
@@ -137,11 +134,6 @@ object-fit: cover;
     cursor: pointer;
     /* object-fit: cover; */
 }
-
-/* .is_liked {
-    /* background-color: #DB8876;
-} */
-
 
 /* Likes price footer */
 
