@@ -39,19 +39,16 @@ const photographerFactoryPage = (photographerObject) => { // Get photographer ob
   };
 };
 
-
 // Create photographer page DOM gallery figures   
-const createImageFactoryPage = (mediaObject) => { // cf. Fromscratch 3/6 2'02
+const createImageFactoryPage = (mediaObject) => {
   const {
     photographerId, title, image, likes,
   } = mediaObject;
-  // const images = `assets/photographersMedias/${photographerId}/${image}`;
+  const figure = document.createElement('figure'); 
+  figure.classList.add('card'); 
+  figure.setAttribute('tabindex', '5');
 
-  const figure = document.createElement('figure'); //
-  figure.classList.add('card'); // .lightbox-element remplacé par .card
-  figure.setAttribute('tabindex', '5'); /// ///////////////////////////// tabulation OK, comment cliquer ?
-
-  const createImageFactoryPageDOM = // Gabarit, template literals // figure figcaption
+  const createImageFactoryPageDOM = // Gabarit or template literals
     `<img src="./assets/photographersMedias/${photographerId}/${image}" alt="${title}"></img>
         <div>
             <h2 tabindex="5">${title}</h2>
@@ -69,11 +66,9 @@ const createVideoFactoryPage = (mediaObject) => {
   const {
     photographerId, title, video, likes,
   } = mediaObject;
-  // const videos = `assets/photographersMedias/${photographerId}/${video}`;
-
   const figure = document.createElement('figure');
   figure.classList.add('card');
-  figure.setAttribute('tabindex', '5'); /// ///////////////////////////// tabulation OK, comment cliquer ?
+  figure.setAttribute('tabindex', '5');
 
   const createVideoFactoryPageDOM = `<video class="video" src="./assets/photographersMedias/${photographerId}/${video}" alt="${title}"></video>
         <div>

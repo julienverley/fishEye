@@ -4,7 +4,7 @@
 function photographerFactory(data) { // Get data (object)
   const {
     name, id, portrait, city, country, tagline, price,
-  } = data;
+  } = data; // key/value name, id, portrait, city etc. 
   const picture = `assets/photographersID/${portrait}`; // Get .jpg 
 
   function getPhotographerCardDOM() { // Build DOM 

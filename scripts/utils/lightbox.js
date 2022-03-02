@@ -1,6 +1,6 @@
-/**  Open or close lightbox
- * 
- */
+// LIGHTBOX MODAL 
+
+// On diplay or close
 const header = document.getElementById('header')
 const lightbox = document.getElementById('lightbox');
 const lightboxContainer = document.querySelector('.lightbox__container');

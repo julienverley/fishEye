@@ -29,16 +29,14 @@ const initPhotographerPage = () => {
 initPhotographerPage(); // Launch init
 
 
-
  // HEADER 
  // Display photographer card
 const displayPhotographer = (photographer) => {
   const photographerHeader = document.querySelector('.photograph-header'); // Add userCardDOM node
   const photographerModel = photographerFactoryPage(photographer); // Object keys/values
-  const userCardDOM = photographerModel.createPhotographerCardDOMPage(); // userCardDOM = objet photographer créé dans le DOM
-  photographerHeader.appendChild(userCardDOM); // ajoute un node userCardDOM
+  const userCardDOM = photographerModel.createPhotographerCardDOMPage(); 
+  photographerHeader.appendChild(userCardDOM);
 };
-
 
 
  // FOOTER
@@ -50,7 +48,6 @@ const displayPrice = (price) => {
   divPrice.innerHTML = priceCardDOM;
   footer.append(divPrice);
 };
-
 
 
 // MEDIAS GALLERY
@@ -200,7 +197,7 @@ const displayMedias = (medias) => {
     
     // LIGHTBOX
     // Keyup events, navigation 
-    document.addEventListener('keyup', (event) => { // mis sur le même addEventListener
+    document.addEventListener('keyup', (event) => { 
       event.stopImmediatePropagation();
       event.preventDefault();
       if (event.code === 'Escape') {
@@ -210,7 +207,7 @@ const displayMedias = (medias) => {
         lightboxPrevious(medias);
       }
       if (event.code === 'ArrowRight') {
-        lightBoxNext(medias);
+        lightboxNext(medias);
       }
     });
     // Click events, navigation
@@ -226,7 +223,7 @@ const displayMedias = (medias) => {
       .addEventListener('click', (event) => {
         event.stopImmediatePropagation();
         event.preventDefault();
-        lightBoxNext(medias);
+        lightboxNext(medias);
       });
     document
       .querySelector('.lightbox__close')
@@ -334,18 +331,14 @@ const displayMedias = (medias) => {
 }; // displayMedias
 
 
-
 // LIGHTBOX
 // Navigation, next
-const lightBoxNext = (medias) => {
+const lightboxNext = (medias) => {
   if (currentLightboxIndex === medias.length - 1) {
-    // lorsque index[0] (et que click previous)...
-    currentLightboxIndex = medias.length - medias.length; // ... index[last]
+    currentLightboxIndex = medias.length - medias.length;
   } else {
     currentLightboxIndex += 1; 
   }
-
-  /// ///////////////////// Refactoriser ////////////////////////
   const mediasCardsFigure = document.querySelectorAll(
     '.photograph-media-cards > figure',
   );
@@ -354,80 +347,70 @@ const lightBoxNext = (medias) => {
   const newElementTitle = newElement.getElementsByTagName('h2')[0].textContent; 
   const lightboxContainer = document.querySelector('.lightbox__container');
   lightboxContainer.innerHTML = '';
+  
+  const lightboxImageVideoInformation = () => {
+    const h2 = document.createElement('h2'); 
+    h2.innerHTML = newElementTitle; 
+    lightboxContainer.append(h2); 
+    h2.setAttribute('tabindex', '1')
+    h2.setAttribute('role', 'Text') 
+    h2.setAttribute('aria-label', `${newElementTitle}`)
+    h2.classList.add("lightbox-title") 
+  }
 
   if (newElementSrc.match(imgRegex)) {
     const img = document.createElement('img'); 
     img.src = newElementSrc;
     lightboxContainer.append(img);
-    const h2 = document.createElement('h2'); 
-    h2.innerHTML = newElementTitle; 
-    lightboxContainer.append(h2); 
-    h2.setAttribute('tabindex', '1') ///////////////////////
-    h2.setAttribute('role', 'Text') ///////////////////////
-    h2.setAttribute('aria-label', `${newElementTitle}`)
-    h2.classList.add("lightbox-title") /////////////////////
+    lightboxImageVideoInformation(); 
+    
 
   } else if (newElementSrc.match(videoRegex)) {
     const video = document.createElement('video'); 
     video.src = newElementSrc;
-    video.controls = true;
     lightboxContainer.append(video);
-    const h2 = document.createElement('h2');
-    h2.innerHTML = newElementTitle; 
-    lightboxContainer.append(h2); 
-    h2.setAttribute('tabindex', '1') ///////////////////////
-    h2.setAttribute('role', 'Text') ///////////////////////
-    h2.setAttribute('aria-label', `${newElementTitle}`)
-    h2.classList.add("lightbox-title") /////////////////////
+    video.controls = true;
+    lightboxImageVideoInformation(); 
   }
 };
 
-/** Lightbox
-* Navigation previous
-*/
+// Navigation, previous
 const lightboxPrevious = (medias) => {
   if (currentLightboxIndex === 0) {
-    // lorsque index[0] (et que click previous)...
-    currentLightboxIndex = medias.length - 1; // ... index[last]
+    currentLightboxIndex = medias.length - 1;
   } else {
     currentLightboxIndex -= 1; 
   }
-
-  /// ///////////////////// Refactoriser ////////////////////////
-
   const mediasCardsFigure = document.querySelectorAll(
     '.photograph-media-cards > figure',
   );
   const newElement = mediasCardsFigure[currentLightboxIndex];
-  // = div index[] //////////////// A revoir //
-  const newElementSrc = newElement.firstChild.src; // = src URL of newElement index []
+  const newElementSrc = newElement.firstChild.src; 
   const newElementTitle = newElement.getElementsByTagName('h2')[0].textContent; 
   const lightboxContainer = document.querySelector('.lightbox__container');
-  lightboxContainer.innerHTML = ''; // empty existing contains
+  lightboxContainer.innerHTML = ''; 
+
+  const lightboxImageVideoInformation = () => {
+    const h2 = document.createElement('h2'); 
+    h2.innerHTML = newElementTitle; 
+    lightboxContainer.append(h2); 
+    h2.setAttribute('tabindex', '1')
+    h2.setAttribute('role', 'Text') 
+    h2.setAttribute('aria-label', `${newElementTitle}`)
+    h2.classList.add("lightbox-title") 
+  }
 
   if (newElementSrc.match(imgRegex)) {
     const img = document.createElement('img'); 
     img.src = newElementSrc;
     lightboxContainer.append(img);
-    const h2 = document.createElement('h2'); 
-    h2.innerHTML = newElementTitle; 
-    lightboxContainer.append(h2); 
-    h2.setAttribute('tabindex', '1') ///////////////////////
-    h2.setAttribute('role', 'Text') ///////////////////////
-    h2.setAttribute('aria-label', `${newElementTitle}`)
-    h2.classList.add("lightbox-title") /////////////////////
+    lightboxImageVideoInformation(); 
 
   } else if (newElementSrc.match(videoRegex)) {
     const video = document.createElement('video'); 
     video.src = newElementSrc;
-    video.controls = true;
     lightboxContainer.append(video);
-    const h2 = document.createElement('h2'); 
-    h2.innerHTML = newElementTitle; 
-    lightboxContainer.append(h2); 
-    h2.setAttribute('tabindex', '1') ///////////////////////
-    h2.setAttribute('role', 'Text') ///////////////////////
-    h2.setAttribute('aria-label', `${newElementTitle}`)
-    h2.classList.add("lightbox-title") /////////////////////
+    video.controls = true;
+    lightboxImageVideoInformation(); 
   }
 };

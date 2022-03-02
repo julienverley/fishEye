@@ -1,6 +1,6 @@
-/**  Aria on main element
- * Used on lightbox and contact modals
- */
+// CONTACT FORM
+
+// Contact modal informations 
  const main = document.getElementById('main');
  const contactModal = document.getElementById('contact_modal')
  const onOpenModal = () => {
@@ -12,22 +12,19 @@
    main.setAttribute('aria-hidden', 'false');
  };
 
-/**  AddEventListeners
- * Close modal on key or click
- * */
+// On keyup event, close contact modal
 document.addEventListener('keyup', (event) => {
   event.preventDefault();
   if (event.code === 'Escape') {
     closeModal();
   }
 });
+// On click event, close contact modal
 document.querySelector('.modal__close').addEventListener('click', () => {
   closeModal();
 });
 
-/**  Open or close modal
- * 
- */
+// Display contact modal
 function displayModal() { // onclick
   const modal = document.getElementById('contact_modal');
   modal.style.display = 'block';
@@ -36,6 +33,7 @@ function displayModal() { // onclick
   onOpenModal();
 }
 
+// Close contact modal
 function closeModal() {
   const modal = document.getElementById('contact_modal');
   modal.style.display = 'none';
