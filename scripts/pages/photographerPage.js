@@ -8,7 +8,7 @@ let mediasLikesTotal = 0;
 
 // Get photographers datas from .json
 const initPhotographerPage = () => {
-  fetch('../../data/photographers.json') // Get .json
+  fetch('./data/photographers.json') // Get .json
     .then((response) => response.json()) // Make JS object
     .then((data) => {
       const searchParams = new URLSearchParams(window.location.search); // Make a new empty URLSearchParams object
@@ -310,7 +310,7 @@ const displayMedias = (medias) => {
   option2.addEventListener('keyup', (event) => {
     event.preventDefault();
     if (event.code === 'Enter') {
-      optionText = event.target.textContent.trim() // enlever les espaces avant et après 
+      optionText = event.target.textContent.trim() // Remove spaces
       if (optionText === "Popularité") {
         sortByPopularity()
       } else if (optionText === "Titre"){
