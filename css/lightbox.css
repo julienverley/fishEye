@@ -14,7 +14,7 @@
 .lightbox__next, 
 .lightbox__prev {
     border: none; 
-    background: url(/assets/icons/arrow.svg) center center / 30px 48px no-repeat; /* no-repeat, to not arrow in extended area */
+    background: url(./assets/icons/arrow.svg) center center / 30px 48px no-repeat; /* no-repeat, to not arrow in extended area */
     width: 30px;     
     height: 48px; 
     position: fixed;
@@ -35,7 +35,7 @@
     width: 42px;
     height: 42px;
     border: none;
-    background: url(/assets/icons/close-lightbox.svg) center center / 42px no-repeat transparent;
+    background: url(./assets/icons/close-lightbox.svg) center center / 42px no-repeat transparent;
     position: fixed;
     text-indent: -10000px;
     top: 16%; 
