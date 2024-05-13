@@ -15,7 +15,7 @@ Julien Verley
 
 ### Visit on GitHub pages
 
-https://julfrontdev.github.io/julien_verley_6_30092021/index.html
+https://julienverley.github.io/fishEye/index.html
 
 ### Install on your computer
 
